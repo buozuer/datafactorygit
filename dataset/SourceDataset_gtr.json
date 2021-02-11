@@ -1,0 +1,269 @@
+{
+	"name": "SourceDataset_gtr",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "burakblobconnection",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "train.csv",
+				"container": "burakblob"
+			},
+			"columnDelimiter": ",",
+			"rowDelimiter": "\n",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Id"
+			},
+			{
+				"name": "MSSubClass"
+			},
+			{
+				"name": "MSZoning"
+			},
+			{
+				"name": "LotFrontage"
+			},
+			{
+				"name": "LotArea"
+			},
+			{
+				"name": "Street"
+			},
+			{
+				"name": "Alley"
+			},
+			{
+				"name": "LotShape"
+			},
+			{
+				"name": "LandContour"
+			},
+			{
+				"name": "Utilities"
+			},
+			{
+				"name": "LotConfig"
+			},
+			{
+				"name": "LandSlope"
+			},
+			{
+				"name": "Neighborhood"
+			},
+			{
+				"name": "Condition1"
+			},
+			{
+				"name": "Condition2"
+			},
+			{
+				"name": "BldgType"
+			},
+			{
+				"name": "HouseStyle"
+			},
+			{
+				"name": "OverallQual"
+			},
+			{
+				"name": "OverallCond"
+			},
+			{
+				"name": "YearBuilt"
+			},
+			{
+				"name": "YearRemodAdd"
+			},
+			{
+				"name": "RoofStyle"
+			},
+			{
+				"name": "RoofMatl"
+			},
+			{
+				"name": "Exterior1st"
+			},
+			{
+				"name": "Exterior2nd"
+			},
+			{
+				"name": "MasVnrType"
+			},
+			{
+				"name": "MasVnrArea"
+			},
+			{
+				"name": "ExterQual"
+			},
+			{
+				"name": "ExterCond"
+			},
+			{
+				"name": "Foundation"
+			},
+			{
+				"name": "BsmtQual"
+			},
+			{
+				"name": "BsmtCond"
+			},
+			{
+				"name": "BsmtExposure"
+			},
+			{
+				"name": "BsmtFinType1"
+			},
+			{
+				"name": "BsmtFinSF1"
+			},
+			{
+				"name": "BsmtFinType2"
+			},
+			{
+				"name": "BsmtFinSF2"
+			},
+			{
+				"name": "BsmtUnfSF"
+			},
+			{
+				"name": "TotalBsmtSF"
+			},
+			{
+				"name": "Heating"
+			},
+			{
+				"name": "HeatingQC"
+			},
+			{
+				"name": "CentralAir"
+			},
+			{
+				"name": "Electrical"
+			},
+			{
+				"name": "1stFlrSF"
+			},
+			{
+				"name": "2ndFlrSF"
+			},
+			{
+				"name": "LowQualFinSF"
+			},
+			{
+				"name": "GrLivArea"
+			},
+			{
+				"name": "BsmtFullBath"
+			},
+			{
+				"name": "BsmtHalfBath"
+			},
+			{
+				"name": "FullBath"
+			},
+			{
+				"name": "HalfBath"
+			},
+			{
+				"name": "BedroomAbvGr"
+			},
+			{
+				"name": "KitchenAbvGr"
+			},
+			{
+				"name": "KitchenQual"
+			},
+			{
+				"name": "TotRmsAbvGrd"
+			},
+			{
+				"name": "Functional"
+			},
+			{
+				"name": "Fireplaces"
+			},
+			{
+				"name": "FireplaceQu"
+			},
+			{
+				"name": "GarageType"
+			},
+			{
+				"name": "GarageYrBlt"
+			},
+			{
+				"name": "GarageFinish"
+			},
+			{
+				"name": "GarageCars"
+			},
+			{
+				"name": "GarageArea"
+			},
+			{
+				"name": "GarageQual"
+			},
+			{
+				"name": "GarageCond"
+			},
+			{
+				"name": "PavedDrive"
+			},
+			{
+				"name": "WoodDeckSF"
+			},
+			{
+				"name": "OpenPorchSF"
+			},
+			{
+				"name": "EnclosedPorch"
+			},
+			{
+				"name": "3SsnPorch"
+			},
+			{
+				"name": "ScreenPorch"
+			},
+			{
+				"name": "PoolArea"
+			},
+			{
+				"name": "PoolQC"
+			},
+			{
+				"name": "Fence"
+			},
+			{
+				"name": "MiscFeature"
+			},
+			{
+				"name": "MiscVal"
+			},
+			{
+				"name": "MoSold"
+			},
+			{
+				"name": "YrSold"
+			},
+			{
+				"name": "SaleType"
+			},
+			{
+				"name": "SaleCondition"
+			},
+			{
+				"name": "SalePrice"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

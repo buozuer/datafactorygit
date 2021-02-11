@@ -1,0 +1,97 @@
+{
+	"name": "jsontosql",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy_q7y",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "burakblob/example_1.json"
+					},
+					{
+						"name": "Destination",
+						"value": "[dbo].[cennet_deneme]"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "BlobSource",
+						"recursive": true
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
+					"redirectIncompatibleRowSettings": {
+						"linkedServiceName": {
+							"referenceName": "AzureBlobStorage14",
+							"type": "LinkedServiceReference"
+						},
+						"path": "burakblob"
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "fruit",
+									"type": "String"
+								},
+								"sink": {
+									"name": "fruit",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "size",
+									"type": "String"
+								},
+								"sink": {
+									"name": "size",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "color",
+									"type": "String"
+								},
+								"sink": {
+									"name": "colour",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_q7y",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_q7y",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2019-07-01T14:55:57Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

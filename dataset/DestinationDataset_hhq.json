@@ -1,0 +1,504 @@
+{
+	"name": "DestinationDataset_hhq",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "MSSubClass",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "MSZoning",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "LotFrontage",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "LotArea",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "Street",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "Alley",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "LotShape",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "LandContour",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "Utilities",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "LotConfig",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "LandSlope",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "Neighborhood",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "Condition1",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "Condition2",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "BldgType",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "HouseStyle",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "OverallQual",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "OverallCond",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "YearBuilt",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "YearRemodAdd",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "RoofStyle",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "RoofMatl",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "Exterior1st",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "Exterior2nd",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "MasVnrType",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "MasVnrArea",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "ExterQual",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "ExterCond",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "Foundation",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "BsmtQual",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "BsmtCond",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "BsmtExposure",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "BsmtFinType1",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "BsmtFinSF1",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "BsmtFinType2",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "BsmtFinSF2",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "BsmtUnfSF",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "TotalBsmtSF",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "Heating",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "HeatingQC",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "CentralAir",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "Electrical",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "1stFlrSF",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "2ndFlrSF",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "LowQualFinSF",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "GrLivArea",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "BsmtFullBath",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "BsmtHalfBath",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "FullBath",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "HalfBath",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "BedroomAbvGr",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "KitchenAbvGr",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "KitchenQual",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "TotRmsAbvGrd",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "Functional",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "Fireplaces",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "FireplaceQu",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "GarageType",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "GarageYrBlt",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "GarageFinish",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "GarageCars",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "GarageArea",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "GarageQual",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "GarageCond",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "PavedDrive",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "WoodDeckSF",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "OpenPorchSF",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "EnclosedPorch",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "3SsnPorch",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "ScreenPorch",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "PoolArea",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "PoolQC",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "Fence",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "MiscFeature",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "MiscVal",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "MoSold",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "YrSold",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "SaleType",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "SaleCondition",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "SalePrice",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "kaggle_train"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

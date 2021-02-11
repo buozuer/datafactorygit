@@ -1,0 +1,32 @@
+{
+	"name": "retailchurndemo",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText3",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable4",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "DerivedColumn1"
+				}
+			],
+			"script": "source(output(\n\t\tUserId as string,\n\t\tAge as string,\n\t\tAddress as string,\n\t\tGender as string,\n\t\tUserType as string,\n\t\tLabel as string,\n\t\tTotal_Quantity as string,\n\t\tTotal_Value as string,\n\t\tStDev_Quantity as string,\n\t\tStDev_Value as string,\n\t\tAvgTimeDelta as string,\n\t\tRecency as string,\n\t\tUnique_TransactionId as string,\n\t\tUnique_ItemId as string,\n\t\tUnique_Location as string,\n\t\tUnique_ProductCategory as string,\n\t\tTotal_Quantity_per_Unique_TransactionId as string,\n\t\tTotal_Quantity_per_Unique_ItemId as string,\n\t\tTotal_Quantity_per_Unique_Location as string,\n\t\tTotal_Quantity_per_Unique_ProductCategory as string,\n\t\tTotal_Value_per_Unique_TransactionId as string,\n\t\tTotal_Value_per_Unique_ItemId as string,\n\t\tTotal_Value_per_Unique_Location as string,\n\t\tTotal_Value_per_Unique_ProductCategory as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tpartitionBy('roundRobin', 2)) ~> source1\nsource1 derive(Label = case(Label == 'Churner',1,0)) ~> DerivedColumn1\nDerivedColumn1 sink(input(\n\t\tUserId as integer,\n\t\tAge as string,\n\t\tAddress as string,\n\t\tGender as string,\n\t\tUserType as string,\n\t\tLabel as string,\n\t\tTotal_Quantity as integer,\n\t\tTotal_Value as integer,\n\t\tStDev_Quantity as double,\n\t\tStDev_Value as double,\n\t\tAvgTimeDelta as double,\n\t\tRecency as integer,\n\t\tUnique_TransactionId as integer,\n\t\tUnique_ItemId as integer,\n\t\tUnique_Location as integer,\n\t\tUnique_ProductCategory as integer,\n\t\tTotal_Quantity_per_Unique_TransactionId as double,\n\t\tTotal_Quantity_per_Unique_ItemId as double,\n\t\tTotal_Quantity_per_Unique_Location as double,\n\t\tTotal_Quantity_per_Unique_ProductCategory as double,\n\t\tTotal_Value_per_Unique_TransactionId as double,\n\t\tTotal_Value_per_Unique_ItemId as double,\n\t\tTotal_Value_per_Unique_Location as double,\n\t\tTotal_Value_per_Unique_ProductCategory as double\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\ttruncate:true,\n\tformat: 'table',\n\tmapColumn(\n\t\tAge,\n\t\tAddress,\n\t\tGender,\n\t\tUserType,\n\t\tLabel,\n\t\tTotal_Quantity,\n\t\tTotal_Value,\n\t\tStDev_Quantity,\n\t\tStDev_Value,\n\t\tAvgTimeDelta,\n\t\tRecency,\n\t\tUnique_TransactionId,\n\t\tUnique_ItemId,\n\t\tUnique_Location,\n\t\tUnique_ProductCategory,\n\t\tTotal_Quantity_per_Unique_TransactionId,\n\t\tTotal_Quantity_per_Unique_ItemId,\n\t\tTotal_Quantity_per_Unique_Location,\n\t\tTotal_Quantity_per_Unique_ProductCategory,\n\t\tTotal_Value_per_Unique_TransactionId,\n\t\tTotal_Value_per_Unique_ItemId,\n\t\tTotal_Value_per_Unique_Location,\n\t\tTotal_Value_per_Unique_ProductCategory,\n\t\tUserId\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink1"
+		}
+	}
+}

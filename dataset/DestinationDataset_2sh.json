@@ -1,0 +1,20 @@
+{
+	"name": "DestinationDataset_2sh",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "burakblobconnection",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "ustunberk"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

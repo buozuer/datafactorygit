@@ -1,0 +1,109 @@
+{
+	"name": "jsoncennet",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy_ibi",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "burakblob/jobs_clustered.json"
+					},
+					{
+						"name": "Destination",
+						"value": "[dbo].[cennet_jsonnn]"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "BlobSource",
+						"recursive": true
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "cluster_list",
+									"type": "String"
+								},
+								"sink": {
+									"name": "cluster_list",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "status.code",
+									"type": "String"
+								},
+								"sink": {
+									"name": "status_code",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "status.msg",
+									"type": "String"
+								},
+								"sink": {
+									"name": "status_msg",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "status.credits",
+									"type": "String"
+								},
+								"sink": {
+									"name": "status_credits",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "status.remaining_credits",
+									"type": "String"
+								},
+								"sink": {
+									"name": "status_remaining_credits",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_ibi",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_ibi",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2019-07-01T15:06:47Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

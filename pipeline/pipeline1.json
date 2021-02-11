@@ -1,0 +1,47 @@
+{
+	"name": "pipeline1",
+	"properties": {
+		"activities": [
+			{
+				"name": "ML Batch Execution1",
+				"type": "AzureMLBatchExecution",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"webServiceInputs": {
+						"input1": {
+							"filePath": "colinsdemoblob/colinsdemo_testdata.csv",
+							"linkedServiceName": {
+								"referenceName": "AzureBlobStorage10",
+								"type": "LinkedServiceReference"
+							}
+						}
+					},
+					"webServiceOutputs": {
+						"output1": {
+							"filePath": "colinsdemooutput",
+							"linkedServiceName": {
+								"referenceName": "AzureBlobStorage11",
+								"type": "LinkedServiceReference"
+							}
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureML1",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2019-06-10T15:52:06Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

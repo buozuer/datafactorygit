@@ -1,0 +1,110 @@
+{
+	"name": "SourceDataset_sbd",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DSVM_CONNECTION",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "medallion",
+				"type": "varchar"
+			},
+			{
+				"name": "hack_license",
+				"type": "varchar"
+			},
+			{
+				"name": "vendor_id",
+				"type": "char"
+			},
+			{
+				"name": "rate_code",
+				"type": "char"
+			},
+			{
+				"name": "store_and_fwd_flag",
+				"type": "char"
+			},
+			{
+				"name": "pickup_datetime",
+				"type": "datetime"
+			},
+			{
+				"name": "dropoff_datetime",
+				"type": "datetime"
+			},
+			{
+				"name": "passenger_count",
+				"type": "int"
+			},
+			{
+				"name": "trip_time_in_secs",
+				"type": "bigint"
+			},
+			{
+				"name": "trip_distance",
+				"type": "float"
+			},
+			{
+				"name": "pickup_longitude",
+				"type": "varchar"
+			},
+			{
+				"name": "pickup_latitude",
+				"type": "varchar"
+			},
+			{
+				"name": "dropoff_longitude",
+				"type": "varchar"
+			},
+			{
+				"name": "dropoff_latitude",
+				"type": "varchar"
+			},
+			{
+				"name": "payment_type",
+				"type": "char"
+			},
+			{
+				"name": "fare_amount",
+				"type": "float"
+			},
+			{
+				"name": "surcharge",
+				"type": "float"
+			},
+			{
+				"name": "mta_tax",
+				"type": "float"
+			},
+			{
+				"name": "tolls_amount",
+				"type": "float"
+			},
+			{
+				"name": "total_amount",
+				"type": "float"
+			},
+			{
+				"name": "tip_amount",
+				"type": "float"
+			},
+			{
+				"name": "tipped",
+				"type": "int"
+			},
+			{
+				"name": "tip_class",
+				"type": "int"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "nyctaxi_sample"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

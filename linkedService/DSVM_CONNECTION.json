@@ -1,0 +1,17 @@
+{
+	"name": "DSVM_CONNECTION",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "integrated security=True;data source=burakmlvm;initial catalog=nyctaxi",
+			"userName": "BURAK_ML_DEMO",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI4YzZmYzgwNy01ZDEyLTQ5MDItOTU1My04ZjkyODJlODI0NjAiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "BURAKMLDSVM",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

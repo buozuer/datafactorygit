@@ -1,0 +1,27 @@
+{
+	"name": "trigger1",
+	"properties": {
+		"annotations": [
+			"retailchurndemo"
+		],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "Retailchurnpipeline",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/eventtriggerdemo/blobs/",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/b87e2be7-4cc5-4795-8350-017440510a83/resourceGroups/colinsdemo/providers/Microsoft.Storage/storageAccounts/colinsdemoblob",
+			"events": [
+				"Microsoft.Storage.BlobCreated",
+				"Microsoft.Storage.BlobDeleted"
+			]
+		}
+	}
+}

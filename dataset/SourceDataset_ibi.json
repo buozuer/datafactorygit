@@ -1,0 +1,49 @@
+{
+	"name": "SourceDataset_ibi",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage14",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureBlob",
+		"structure": [
+			{
+				"name": "cluster_list",
+				"type": "String"
+			},
+			{
+				"name": "status.code",
+				"type": "String"
+			},
+			{
+				"name": "status.msg",
+				"type": "String"
+			},
+			{
+				"name": "status.credits",
+				"type": "String"
+			},
+			{
+				"name": "status.remaining_credits",
+				"type": "String"
+			}
+		],
+		"typeProperties": {
+			"format": {
+				"type": "JsonFormat",
+				"filePattern": "setOfObjects",
+				"jsonPathDefinition": {
+					"cluster_list": "$.['cluster_list']",
+					"status.code": "$.['status']['code']",
+					"status.msg": "$.['status']['msg']",
+					"status.credits": "$.['status']['credits']",
+					"status.remaining_credits": "$.['status']['remaining_credits']"
+				}
+			},
+			"fileName": "jobs_clustered.json",
+			"folderPath": "burakblob"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

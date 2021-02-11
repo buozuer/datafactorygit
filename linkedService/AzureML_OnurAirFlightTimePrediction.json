@@ -1,0 +1,13 @@
+{
+	"name": "AzureML_OnurAirFlightTimePrediction",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "Onur Air Flight Time Prediction Model Scoring API",
+		"annotations": [],
+		"type": "AzureML",
+		"typeProperties": {
+			"mlEndpoint": "https://ussouthcentral.services.azureml.net/workspaces/a9eba14534554ca29be2153947e54739/services/73e2b78fa8874da1acb6f3e4051efb80/jobs?api-version=2.0",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkNPTElOU0RFTU9EQVRBRkFDVE9SWV82NDFlY2Q5My1mNGYzLTQzMDktYWFhZS03NDY0NDVhYmQ3OTIiDQp9"
+		}
+	}
+}

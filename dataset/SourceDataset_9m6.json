@@ -1,0 +1,75 @@
+{
+	"name": "SourceDataset_9m6",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "cogsearchblob",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "AzureDB.xlsx",
+				"container": "elementcogsearch"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "ServiceName",
+				"type": "String"
+			},
+			{
+				"name": "ServiceType",
+				"type": "String"
+			},
+			{
+				"name": "Capability",
+				"type": "String"
+			},
+			{
+				"name": "HierarchyLevelLowest",
+				"type": "String"
+			},
+			{
+				"name": "HierarchyLevel4",
+				"type": "String"
+			},
+			{
+				"name": "HierarchyLevel3",
+				"type": "String"
+			},
+			{
+				"name": "HierarchyLevel2",
+				"type": "String"
+			},
+			{
+				"name": "HierarchyLevel1",
+				"type": "String"
+			},
+			{
+				"name": "Specification",
+				"type": "String"
+			},
+			{
+				"name": "Material",
+				"type": "String"
+			},
+			{
+				"name": "LabName",
+				"type": "String"
+			},
+			{
+				"name": "Country",
+				"type": "String"
+			},
+			{
+				"name": "Continent",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

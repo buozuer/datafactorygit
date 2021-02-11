@@ -1,0 +1,64 @@
+{
+	"name": "Json1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "cogsearchblob",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "118497 79828 (2).pdf.labels.json",
+				"container": "formreqtrainlabeled"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"document": {
+					"type": "string"
+				},
+				"labels": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"label": {
+								"type": "string"
+							},
+							"key": {
+								"type": "null"
+							},
+							"value": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"page": {
+											"type": "integer"
+										},
+										"text": {
+											"type": "string"
+										},
+										"boundingBoxes": {
+											"type": "array",
+											"items": {
+												"type": "array",
+												"items": {
+													"type": "number"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,6 @@
+{
+	"name": "dsvmselfhosted",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}

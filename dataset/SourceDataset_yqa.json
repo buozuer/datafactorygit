@@ -1,0 +1,22 @@
+{
+	"name": "SourceDataset_yqa",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "onurairml_scoreddata",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "data.dataset.parquet",
+				"folderPath": "azureml/83761bd2-ed25-4b3d-b5d1-bff000398d85/Scored_dataset",
+				"container": "azureml-blobstore-d485de1e-bee0-44a1-8091-7417e6f5959c"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

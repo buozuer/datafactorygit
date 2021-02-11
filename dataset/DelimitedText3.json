@@ -1,0 +1,121 @@
+{
+	"name": "DelimitedText3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "burakblobconnection",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Churnmodeltrainset.csv",
+				"container": "retailchurndemo"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "UserId",
+				"type": "String"
+			},
+			{
+				"name": "Age",
+				"type": "String"
+			},
+			{
+				"name": "Address",
+				"type": "String"
+			},
+			{
+				"name": "Gender",
+				"type": "String"
+			},
+			{
+				"name": "UserType",
+				"type": "String"
+			},
+			{
+				"name": "Label",
+				"type": "String"
+			},
+			{
+				"name": "Total_Quantity",
+				"type": "String"
+			},
+			{
+				"name": "Total_Value",
+				"type": "String"
+			},
+			{
+				"name": "StDev_Quantity",
+				"type": "String"
+			},
+			{
+				"name": "StDev_Value",
+				"type": "String"
+			},
+			{
+				"name": "AvgTimeDelta",
+				"type": "String"
+			},
+			{
+				"name": "Recency",
+				"type": "String"
+			},
+			{
+				"name": "Unique_TransactionId",
+				"type": "String"
+			},
+			{
+				"name": "Unique_ItemId",
+				"type": "String"
+			},
+			{
+				"name": "Unique_Location",
+				"type": "String"
+			},
+			{
+				"name": "Unique_ProductCategory",
+				"type": "String"
+			},
+			{
+				"name": "Total_Quantity_per_Unique_TransactionId",
+				"type": "String"
+			},
+			{
+				"name": "Total_Quantity_per_Unique_ItemId",
+				"type": "String"
+			},
+			{
+				"name": "Total_Quantity_per_Unique_Location",
+				"type": "String"
+			},
+			{
+				"name": "Total_Quantity_per_Unique_ProductCategory",
+				"type": "String"
+			},
+			{
+				"name": "Total_Value_per_Unique_TransactionId",
+				"type": "String"
+			},
+			{
+				"name": "Total_Value_per_Unique_ItemId",
+				"type": "String"
+			},
+			{
+				"name": "Total_Value_per_Unique_Location",
+				"type": "String"
+			},
+			{
+				"name": "Total_Value_per_Unique_ProductCategory",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

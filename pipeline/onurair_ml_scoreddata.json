@@ -1,0 +1,272 @@
+{
+	"name": "onurair_ml_scoreddata",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy_yqa",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "azureml-blobstore-d485de1e-bee0-44a1-8091-7417e6f5959c/azureml/83761bd2-ed25-4b3d-b5d1-bff000398d85/Scored_dataset/data.dataset.parquet"
+					},
+					{
+						"name": "Destination",
+						"value": "dbo.OnurAir_ML_Scored"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "ParquetSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Ucusun_Gerceklestigi_Ay",
+									"type": "UTF8"
+								},
+								"sink": {
+									"name": "Ucusun_Gerceklestigi_Ay",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Ucusun_Gun_Grubu",
+									"type": "UTF8"
+								},
+								"sink": {
+									"name": "Ucusun_Gun_Grubu",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Ucus_Vakti_Kalkis",
+									"type": "UTF8"
+								},
+								"sink": {
+									"name": "Ucus_Vakti_Kalkis",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Ucus_Vakti_Varis",
+									"type": "UTF8"
+								},
+								"sink": {
+									"name": "Ucus_Vakti_Varis",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Rota",
+									"type": "UTF8"
+								},
+								"sink": {
+									"name": "Rota",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Kalkis_Havalimani",
+									"type": "UTF8"
+								},
+								"sink": {
+									"name": "Kalkis_Havalimani",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Inis_Havalimani",
+									"type": "UTF8"
+								},
+								"sink": {
+									"name": "Inis_Havalimani",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Departure_Country",
+									"type": "UTF8"
+								},
+								"sink": {
+									"name": "Departure_Country",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Arrival_Country",
+									"type": "UTF8"
+								},
+								"sink": {
+									"name": "Arrival_Country",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Acil_Inis_Meydani",
+									"type": "UTF8"
+								},
+								"sink": {
+									"name": "Acil_Inis_Meydani",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Ucak_Kuyruk_Kodu",
+									"type": "UTF8"
+								},
+								"sink": {
+									"name": "Ucak_Kuyruk_Kodu",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Ucak_Tipi",
+									"type": "UTF8"
+								},
+								"sink": {
+									"name": "Ucak_Tipi",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Yolcu_Kapasitesi",
+									"type": "INT64"
+								},
+								"sink": {
+									"name": "Yolcu_Kapasitesi",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Ekip_Sayisi",
+									"type": "INT64"
+								},
+								"sink": {
+									"name": "Ekip_Sayisi",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Toplam_Yolcu_Sayisi",
+									"type": "INT64"
+								},
+								"sink": {
+									"name": "Toplam_Yolcu_Sayisi",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Ucagin_Havada_Kalma_Suresi",
+									"type": "INT64"
+								},
+								"sink": {
+									"name": "Ucagin_Havada_Kalma_Suresi",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Ucagin_Havada_Kalma_Suresi_ex",
+									"type": "INT64"
+								},
+								"sink": {
+									"name": "Ucagin_Havada_Kalma_Suresi_ex",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Kus_Bakisi_Mesafe",
+									"type": "UTF8"
+								},
+								"sink": {
+									"name": "Kus_Bakisi_Mesafe",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Ucagin_Mak_Kalkis_Agirligi",
+									"type": "UTF8"
+								},
+								"sink": {
+									"name": "Ucagin_Mak_Kalkis_Agirligi",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Yakit_Tuketim_Ortalamasi",
+									"type": "UTF8"
+								},
+								"sink": {
+									"name": "Yakit_Tuketim_Ortalamasi",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Scored Labels",
+									"type": "DOUBLE"
+								},
+								"sink": {
+									"name": "Scored_Labels",
+									"type": "Double"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_yqa",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_yqa",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2019-12-22T22:50:09Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

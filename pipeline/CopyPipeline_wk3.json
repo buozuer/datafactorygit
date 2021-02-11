@@ -1,0 +1,730 @@
+{
+	"name": "CopyPipeline_wk3",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach_wk3",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.cw_items",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Copy_wk3",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [
+								{
+									"name": "Source",
+									"value": "@{item().source.schema}.@{item().source.table}"
+								},
+								{
+									"name": "Destination",
+									"value": "adventureworks2019//@{item().destination.fileName}"
+								}
+							],
+							"typeProperties": {
+								"source": {
+									"type": "SqlServerSource",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobStorageWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"validateDataConsistency": false
+							},
+							"inputs": [
+								{
+									"referenceName": "SourceDataset_wk3",
+									"type": "DatasetReference",
+									"parameters": {
+										"cw_schema": "@item().source.schema",
+										"cw_table": "@item().source.table"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DestinationDataset_wk3",
+									"type": "DatasetReference",
+									"parameters": {
+										"cw_fileName": "@item().destination.fileName"
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"cw_items": {
+				"type": "Array",
+				"defaultValue": [
+					{
+						"source": {
+							"schema": "dbo",
+							"table": "AWBuildVersion"
+						},
+						"destination": {
+							"fileName": "dboAWBuildVersion"
+						}
+					},
+					{
+						"source": {
+							"schema": "dbo",
+							"table": "DatabaseLog"
+						},
+						"destination": {
+							"fileName": "dboDatabaseLog"
+						}
+					},
+					{
+						"source": {
+							"schema": "dbo",
+							"table": "ErrorLog"
+						},
+						"destination": {
+							"fileName": "dboErrorLog"
+						}
+					},
+					{
+						"source": {
+							"schema": "HumanResources",
+							"table": "Department"
+						},
+						"destination": {
+							"fileName": "HumanResourcesDepartment"
+						}
+					},
+					{
+						"source": {
+							"schema": "HumanResources",
+							"table": "Employee"
+						},
+						"destination": {
+							"fileName": "HumanResourcesEmployee"
+						}
+					},
+					{
+						"source": {
+							"schema": "HumanResources",
+							"table": "EmployeeDepartmentHistory"
+						},
+						"destination": {
+							"fileName": "HumanResourcesEmployeeDepartmentHistory"
+						}
+					},
+					{
+						"source": {
+							"schema": "HumanResources",
+							"table": "EmployeePayHistory"
+						},
+						"destination": {
+							"fileName": "HumanResourcesEmployeePayHistory"
+						}
+					},
+					{
+						"source": {
+							"schema": "HumanResources",
+							"table": "JobCandidate"
+						},
+						"destination": {
+							"fileName": "HumanResourcesJobCandidate"
+						}
+					},
+					{
+						"source": {
+							"schema": "HumanResources",
+							"table": "Shift"
+						},
+						"destination": {
+							"fileName": "HumanResourcesShift"
+						}
+					},
+					{
+						"source": {
+							"schema": "Person",
+							"table": "Address"
+						},
+						"destination": {
+							"fileName": "PersonAddress"
+						}
+					},
+					{
+						"source": {
+							"schema": "Person",
+							"table": "AddressType"
+						},
+						"destination": {
+							"fileName": "PersonAddressType"
+						}
+					},
+					{
+						"source": {
+							"schema": "Person",
+							"table": "BusinessEntity"
+						},
+						"destination": {
+							"fileName": "PersonBusinessEntity"
+						}
+					},
+					{
+						"source": {
+							"schema": "Person",
+							"table": "BusinessEntityAddress"
+						},
+						"destination": {
+							"fileName": "PersonBusinessEntityAddress"
+						}
+					},
+					{
+						"source": {
+							"schema": "Person",
+							"table": "BusinessEntityContact"
+						},
+						"destination": {
+							"fileName": "PersonBusinessEntityContact"
+						}
+					},
+					{
+						"source": {
+							"schema": "Person",
+							"table": "ContactType"
+						},
+						"destination": {
+							"fileName": "PersonContactType"
+						}
+					},
+					{
+						"source": {
+							"schema": "Person",
+							"table": "CountryRegion"
+						},
+						"destination": {
+							"fileName": "PersonCountryRegion"
+						}
+					},
+					{
+						"source": {
+							"schema": "Person",
+							"table": "EmailAddress"
+						},
+						"destination": {
+							"fileName": "PersonEmailAddress"
+						}
+					},
+					{
+						"source": {
+							"schema": "Person",
+							"table": "Password"
+						},
+						"destination": {
+							"fileName": "PersonPassword"
+						}
+					},
+					{
+						"source": {
+							"schema": "Person",
+							"table": "Person"
+						},
+						"destination": {
+							"fileName": "PersonPerson"
+						}
+					},
+					{
+						"source": {
+							"schema": "Person",
+							"table": "PersonPhone"
+						},
+						"destination": {
+							"fileName": "PersonPersonPhone"
+						}
+					},
+					{
+						"source": {
+							"schema": "Person",
+							"table": "PhoneNumberType"
+						},
+						"destination": {
+							"fileName": "PersonPhoneNumberType"
+						}
+					},
+					{
+						"source": {
+							"schema": "Person",
+							"table": "StateProvince"
+						},
+						"destination": {
+							"fileName": "PersonStateProvince"
+						}
+					},
+					{
+						"source": {
+							"schema": "Production",
+							"table": "BillOfMaterials"
+						},
+						"destination": {
+							"fileName": "ProductionBillOfMaterials"
+						}
+					},
+					{
+						"source": {
+							"schema": "Production",
+							"table": "Culture"
+						},
+						"destination": {
+							"fileName": "ProductionCulture"
+						}
+					},
+					{
+						"source": {
+							"schema": "Production",
+							"table": "Document"
+						},
+						"destination": {
+							"fileName": "ProductionDocument"
+						}
+					},
+					{
+						"source": {
+							"schema": "Production",
+							"table": "Illustration"
+						},
+						"destination": {
+							"fileName": "ProductionIllustration"
+						}
+					},
+					{
+						"source": {
+							"schema": "Production",
+							"table": "Location"
+						},
+						"destination": {
+							"fileName": "ProductionLocation"
+						}
+					},
+					{
+						"source": {
+							"schema": "Production",
+							"table": "Product"
+						},
+						"destination": {
+							"fileName": "ProductionProduct"
+						}
+					},
+					{
+						"source": {
+							"schema": "Production",
+							"table": "ProductCategory"
+						},
+						"destination": {
+							"fileName": "ProductionProductCategory"
+						}
+					},
+					{
+						"source": {
+							"schema": "Production",
+							"table": "ProductCostHistory"
+						},
+						"destination": {
+							"fileName": "ProductionProductCostHistory"
+						}
+					},
+					{
+						"source": {
+							"schema": "Production",
+							"table": "ProductDescription"
+						},
+						"destination": {
+							"fileName": "ProductionProductDescription"
+						}
+					},
+					{
+						"source": {
+							"schema": "Production",
+							"table": "ProductDocument"
+						},
+						"destination": {
+							"fileName": "ProductionProductDocument"
+						}
+					},
+					{
+						"source": {
+							"schema": "Production",
+							"table": "ProductInventory"
+						},
+						"destination": {
+							"fileName": "ProductionProductInventory"
+						}
+					},
+					{
+						"source": {
+							"schema": "Production",
+							"table": "ProductListPriceHistory"
+						},
+						"destination": {
+							"fileName": "ProductionProductListPriceHistory"
+						}
+					},
+					{
+						"source": {
+							"schema": "Production",
+							"table": "ProductModel"
+						},
+						"destination": {
+							"fileName": "ProductionProductModel"
+						}
+					},
+					{
+						"source": {
+							"schema": "Production",
+							"table": "ProductModelIllustration"
+						},
+						"destination": {
+							"fileName": "ProductionProductModelIllustration"
+						}
+					},
+					{
+						"source": {
+							"schema": "Production",
+							"table": "ProductModelProductDescriptionCulture"
+						},
+						"destination": {
+							"fileName": "ProductionProductModelProductDescriptionCulture"
+						}
+					},
+					{
+						"source": {
+							"schema": "Production",
+							"table": "ProductPhoto"
+						},
+						"destination": {
+							"fileName": "ProductionProductPhoto"
+						}
+					},
+					{
+						"source": {
+							"schema": "Production",
+							"table": "ProductProductPhoto"
+						},
+						"destination": {
+							"fileName": "ProductionProductProductPhoto"
+						}
+					},
+					{
+						"source": {
+							"schema": "Production",
+							"table": "ProductReview"
+						},
+						"destination": {
+							"fileName": "ProductionProductReview"
+						}
+					},
+					{
+						"source": {
+							"schema": "Production",
+							"table": "ProductSubcategory"
+						},
+						"destination": {
+							"fileName": "ProductionProductSubcategory"
+						}
+					},
+					{
+						"source": {
+							"schema": "Production",
+							"table": "ScrapReason"
+						},
+						"destination": {
+							"fileName": "ProductionScrapReason"
+						}
+					},
+					{
+						"source": {
+							"schema": "Production",
+							"table": "TransactionHistory"
+						},
+						"destination": {
+							"fileName": "ProductionTransactionHistory"
+						}
+					},
+					{
+						"source": {
+							"schema": "Production",
+							"table": "TransactionHistoryArchive"
+						},
+						"destination": {
+							"fileName": "ProductionTransactionHistoryArchive"
+						}
+					},
+					{
+						"source": {
+							"schema": "Production",
+							"table": "UnitMeasure"
+						},
+						"destination": {
+							"fileName": "ProductionUnitMeasure"
+						}
+					},
+					{
+						"source": {
+							"schema": "Production",
+							"table": "WorkOrder"
+						},
+						"destination": {
+							"fileName": "ProductionWorkOrder"
+						}
+					},
+					{
+						"source": {
+							"schema": "Production",
+							"table": "WorkOrderRouting"
+						},
+						"destination": {
+							"fileName": "ProductionWorkOrderRouting"
+						}
+					},
+					{
+						"source": {
+							"schema": "Purchasing",
+							"table": "ProductVendor"
+						},
+						"destination": {
+							"fileName": "PurchasingProductVendor"
+						}
+					},
+					{
+						"source": {
+							"schema": "Purchasing",
+							"table": "PurchaseOrderDetail"
+						},
+						"destination": {
+							"fileName": "PurchasingPurchaseOrderDetail"
+						}
+					},
+					{
+						"source": {
+							"schema": "Purchasing",
+							"table": "PurchaseOrderHeader"
+						},
+						"destination": {
+							"fileName": "PurchasingPurchaseOrderHeader"
+						}
+					},
+					{
+						"source": {
+							"schema": "Purchasing",
+							"table": "ShipMethod"
+						},
+						"destination": {
+							"fileName": "PurchasingShipMethod"
+						}
+					},
+					{
+						"source": {
+							"schema": "Purchasing",
+							"table": "Vendor"
+						},
+						"destination": {
+							"fileName": "PurchasingVendor"
+						}
+					},
+					{
+						"source": {
+							"schema": "Sales",
+							"table": "CountryRegionCurrency"
+						},
+						"destination": {
+							"fileName": "SalesCountryRegionCurrency"
+						}
+					},
+					{
+						"source": {
+							"schema": "Sales",
+							"table": "CreditCard"
+						},
+						"destination": {
+							"fileName": "SalesCreditCard"
+						}
+					},
+					{
+						"source": {
+							"schema": "Sales",
+							"table": "Currency"
+						},
+						"destination": {
+							"fileName": "SalesCurrency"
+						}
+					},
+					{
+						"source": {
+							"schema": "Sales",
+							"table": "CurrencyRate"
+						},
+						"destination": {
+							"fileName": "SalesCurrencyRate"
+						}
+					},
+					{
+						"source": {
+							"schema": "Sales",
+							"table": "Customer"
+						},
+						"destination": {
+							"fileName": "SalesCustomer"
+						}
+					},
+					{
+						"source": {
+							"schema": "Sales",
+							"table": "PersonCreditCard"
+						},
+						"destination": {
+							"fileName": "SalesPersonCreditCard"
+						}
+					},
+					{
+						"source": {
+							"schema": "Sales",
+							"table": "SalesOrderDetail"
+						},
+						"destination": {
+							"fileName": "SalesSalesOrderDetail"
+						}
+					},
+					{
+						"source": {
+							"schema": "Sales",
+							"table": "SalesOrderHeader"
+						},
+						"destination": {
+							"fileName": "SalesSalesOrderHeader"
+						}
+					},
+					{
+						"source": {
+							"schema": "Sales",
+							"table": "SalesOrderHeaderSalesReason"
+						},
+						"destination": {
+							"fileName": "SalesSalesOrderHeaderSalesReason"
+						}
+					},
+					{
+						"source": {
+							"schema": "Sales",
+							"table": "SalesPerson"
+						},
+						"destination": {
+							"fileName": "SalesSalesPerson"
+						}
+					},
+					{
+						"source": {
+							"schema": "Sales",
+							"table": "SalesPersonQuotaHistory"
+						},
+						"destination": {
+							"fileName": "SalesSalesPersonQuotaHistory"
+						}
+					},
+					{
+						"source": {
+							"schema": "Sales",
+							"table": "SalesReason"
+						},
+						"destination": {
+							"fileName": "SalesSalesReason"
+						}
+					},
+					{
+						"source": {
+							"schema": "Sales",
+							"table": "SalesTaxRate"
+						},
+						"destination": {
+							"fileName": "SalesSalesTaxRate"
+						}
+					},
+					{
+						"source": {
+							"schema": "Sales",
+							"table": "SalesTerritory"
+						},
+						"destination": {
+							"fileName": "SalesSalesTerritory"
+						}
+					},
+					{
+						"source": {
+							"schema": "Sales",
+							"table": "SalesTerritoryHistory"
+						},
+						"destination": {
+							"fileName": "SalesSalesTerritoryHistory"
+						}
+					},
+					{
+						"source": {
+							"schema": "Sales",
+							"table": "ShoppingCartItem"
+						},
+						"destination": {
+							"fileName": "SalesShoppingCartItem"
+						}
+					},
+					{
+						"source": {
+							"schema": "Sales",
+							"table": "SpecialOffer"
+						},
+						"destination": {
+							"fileName": "SalesSpecialOffer"
+						}
+					},
+					{
+						"source": {
+							"schema": "Sales",
+							"table": "SpecialOfferProduct"
+						},
+						"destination": {
+							"fileName": "SalesSpecialOfferProduct"
+						}
+					},
+					{
+						"source": {
+							"schema": "Sales",
+							"table": "Store"
+						},
+						"destination": {
+							"fileName": "SalesStore"
+						}
+					}
+				]
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-02-04T06:24:05Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

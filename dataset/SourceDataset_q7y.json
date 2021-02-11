@@ -1,0 +1,39 @@
+{
+	"name": "SourceDataset_q7y",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage14",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureBlob",
+		"structure": [
+			{
+				"name": "fruit",
+				"type": "String"
+			},
+			{
+				"name": "size",
+				"type": "String"
+			},
+			{
+				"name": "color",
+				"type": "String"
+			}
+		],
+		"typeProperties": {
+			"format": {
+				"type": "JsonFormat",
+				"filePattern": "setOfObjects",
+				"jsonPathDefinition": {
+					"fruit": "$.['fruit']",
+					"size": "$.['size']",
+					"color": "$.['color']"
+				}
+			},
+			"fileName": "example_1.json",
+			"folderPath": "burakblob"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
