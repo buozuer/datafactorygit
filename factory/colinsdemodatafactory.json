@@ -1,12 +1,4 @@
 {
 	"name": "colinsdemodatafactory",
-	"properties": {
-		"globalParameters": {
-			"PARAMETERSNAME": {
-				"type": "string",
-				"value": "DK"
-			}
-		}
-	},
 	"location": "northeurope"
 }
