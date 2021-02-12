@@ -1,0 +1,132 @@
+{
+	"name": "AzureSqlTabledemo",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BURAK_DEMO_DB",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "UserId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Age",
+				"type": "varchar"
+			},
+			{
+				"name": "Address",
+				"type": "varchar"
+			},
+			{
+				"name": "Gender",
+				"type": "varchar"
+			},
+			{
+				"name": "UserType",
+				"type": "varchar"
+			},
+			{
+				"name": "Label",
+				"type": "varchar"
+			},
+			{
+				"name": "Total_Quantity",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Total_Value",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "StDev_Quantity",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "StDev_Value",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "AvgTimeDelta",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Recency",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Unique_TransactionId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Unique_ItemId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Unique_Location",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Unique_ProductCategory",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Total_Quantity_per_Unique_TransactionId",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Total_Quantity_per_Unique_ItemId",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Total_Quantity_per_Unique_Location",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Total_Quantity_per_Unique_ProductCategory",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Total_Value_per_Unique_TransactionId",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Total_Value_per_Unique_ItemId",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Total_Value_per_Unique_Location",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Total_Value_per_Unique_ProductCategory",
+				"type": "float",
+				"precision": 15
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "retailchurn_train"
+		}
+	}
+}
