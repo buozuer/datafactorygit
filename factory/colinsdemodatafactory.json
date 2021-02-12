@@ -1,4 +1,12 @@
 {
 	"name": "colinsdemodatafactory",
+	"properties": {
+		"globalParameters": {
+			"UATSERVERNAME": {
+				"type": "object",
+				"value": "FJFJ"
+			}
+		}
+	},
 	"location": "northeurope"
 }
