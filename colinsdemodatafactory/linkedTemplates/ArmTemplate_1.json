@@ -1,0 +1,1276 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "colinsdemodatafactory"
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
+		},
+		"AzureSqlDatabase2_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase2'"
+		},
+		"AzureSqlDatabase3_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase3'"
+		},
+		"AzureSynapseAnalytics_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSynapseAnalytics'"
+		},
+		"BURAK_DEMO_DB_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'BURAK_DEMO_DB'"
+		},
+		"OnurAirBlob_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'OnurAirBlob'"
+		},
+		"OnurAir_ML_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'OnurAir_ML'"
+		},
+		"burakblobconnection_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'burakblobconnection'"
+		},
+		"cogsearchblob_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'cogsearchblob'"
+		},
+		"onurairml_scoreddata_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'onurairml_scoreddata'"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase2_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase3')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase3_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSynapseAnalytics')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDW",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSynapseAnalytics_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/BURAK_DEMO_DB')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('BURAK_DEMO_DB_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OnurAirBlob')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('OnurAirBlob_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OnurAir_ML')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('OnurAir_ML_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/burakblobconnection')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('burakblobconnection_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/cogsearchblob')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('cogsearchblob_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/onurairml_scoreddata')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('onurairml_scoreddata_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/BURAKMLDSVM')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dsvmselfhosted')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/integruntimeml')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "Managed",
+				"typeProperties": {
+					"computeProperties": {
+						"location": "AutoResolve",
+						"dataFlowProperties": {
+							"computeType": "General",
+							"coreCount": 8,
+							"timeToLive": 0
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/adfdatabricksdemo')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Notebook1",
+						"type": "DatabricksNotebook",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/adftutorial/mynotebook",
+							"baseParameters": {
+								"input": {
+									"value": "@pipeline().parameters.name",
+									"type": "Expression"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureDatabricks",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"parameters": {
+					"name": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-08-25T07:05:59Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ML Batch Execution1",
+						"type": "AzureMLBatchExecution",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"webServiceInputs": {
+								"input1": {
+									"filePath": "colinsdemoblob/colinsdemo_testdata.csv",
+									"linkedServiceName": {
+										"referenceName": "AzureBlobStorage10",
+										"type": "LinkedServiceReference"
+									}
+								}
+							},
+							"webServiceOutputs": {
+								"output1": {
+									"filePath": "colinsdemooutput",
+									"linkedServiceName": {
+										"referenceName": "AzureBlobStorage11",
+										"type": "LinkedServiceReference"
+									}
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureML1",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"annotations": [],
+				"lastPublishTime": "2019-06-10T15:52:06Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlSource')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "DAY",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "MONTH",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "YEAR",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "dates"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "kaggle_train"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "MSSubClass",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "MSZoning",
+						"type": "varchar"
+					},
+					{
+						"name": "LotFrontage",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "LotArea",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Street",
+						"type": "varchar"
+					},
+					{
+						"name": "Alley",
+						"type": "varchar"
+					},
+					{
+						"name": "LotShape",
+						"type": "varchar"
+					},
+					{
+						"name": "LandContour",
+						"type": "varchar"
+					},
+					{
+						"name": "Utilities",
+						"type": "varchar"
+					},
+					{
+						"name": "LotConfig",
+						"type": "varchar"
+					},
+					{
+						"name": "LandSlope",
+						"type": "varchar"
+					},
+					{
+						"name": "Neighborhood",
+						"type": "varchar"
+					},
+					{
+						"name": "Condition1",
+						"type": "varchar"
+					},
+					{
+						"name": "Condition2",
+						"type": "varchar"
+					},
+					{
+						"name": "BldgType",
+						"type": "varchar"
+					},
+					{
+						"name": "HouseStyle",
+						"type": "varchar"
+					},
+					{
+						"name": "OverallQual",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "OverallCond",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "YearBuilt",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "YearRemodAdd",
+						"type": "varchar"
+					},
+					{
+						"name": "RoofStyle",
+						"type": "varchar"
+					},
+					{
+						"name": "RoofMatl",
+						"type": "varchar"
+					},
+					{
+						"name": "Exterior1st",
+						"type": "varchar"
+					},
+					{
+						"name": "Exterior2nd",
+						"type": "varchar"
+					},
+					{
+						"name": "MasVnrType",
+						"type": "varchar"
+					},
+					{
+						"name": "MasVnrArea",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ExterQual",
+						"type": "varchar"
+					},
+					{
+						"name": "ExterCond",
+						"type": "varchar"
+					},
+					{
+						"name": "Foundation",
+						"type": "varchar"
+					},
+					{
+						"name": "BsmtQual",
+						"type": "varchar"
+					},
+					{
+						"name": "BsmtCond",
+						"type": "varchar"
+					},
+					{
+						"name": "BsmtExposure",
+						"type": "varchar"
+					},
+					{
+						"name": "BsmtFinType1",
+						"type": "varchar"
+					},
+					{
+						"name": "BsmtFinSF1",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "BsmtFinType2",
+						"type": "varchar"
+					},
+					{
+						"name": "BsmtFinSF2",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "BsmtUnfSF",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "TotalBsmtSF",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Heating",
+						"type": "varchar"
+					},
+					{
+						"name": "HeatingQC",
+						"type": "varchar"
+					},
+					{
+						"name": "CentralAir",
+						"type": "varchar"
+					},
+					{
+						"name": "Electrical",
+						"type": "varchar"
+					},
+					{
+						"name": "1stFlrSF",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "2ndFlrSF",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "LowQualFinSF",
+						"type": "varchar"
+					},
+					{
+						"name": "GrLivArea",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "BsmtFullBath",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "BsmtHalfBath",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "FullBath",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "HalfBath",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "BedroomAbvGr",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "KitchenAbvGr",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "KitchenQual",
+						"type": "varchar"
+					},
+					{
+						"name": "TotRmsAbvGrd",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Functional",
+						"type": "varchar"
+					},
+					{
+						"name": "Fireplaces",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "FireplaceQu",
+						"type": "varchar"
+					},
+					{
+						"name": "GarageType",
+						"type": "varchar"
+					},
+					{
+						"name": "GarageYrBlt",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "GarageFinish",
+						"type": "varchar"
+					},
+					{
+						"name": "GarageCars",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "GarageArea",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "GarageQual",
+						"type": "varchar"
+					},
+					{
+						"name": "GarageCond",
+						"type": "varchar"
+					},
+					{
+						"name": "PavedDrive",
+						"type": "varchar"
+					},
+					{
+						"name": "WoodDeckSF",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "OpenPorchSF",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "EnclosedPorch",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "3SsnPorch",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ScreenPorch",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PoolArea",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PoolQC",
+						"type": "varchar"
+					},
+					{
+						"name": "Fence",
+						"type": "varchar"
+					},
+					{
+						"name": "MiscFeature",
+						"type": "varchar"
+					},
+					{
+						"name": "MiscVal",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "MoSold",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "YrSold",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SaleType",
+						"type": "varchar"
+					},
+					{
+						"name": "SaleCondition",
+						"type": "varchar"
+					},
+					{
+						"name": "SalePrice",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "kaggle_train"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable3')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "MSSubClass",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "MSZoning",
+						"type": "varchar"
+					},
+					{
+						"name": "LotFrontage",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "LotArea",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Street",
+						"type": "varchar"
+					},
+					{
+						"name": "Alley",
+						"type": "varchar"
+					},
+					{
+						"name": "LotShape",
+						"type": "varchar"
+					},
+					{
+						"name": "LandContour",
+						"type": "varchar"
+					},
+					{
+						"name": "Utilities",
+						"type": "varchar"
+					},
+					{
+						"name": "LotConfig",
+						"type": "varchar"
+					},
+					{
+						"name": "LandSlope",
+						"type": "varchar"
+					},
+					{
+						"name": "Neighborhood",
+						"type": "varchar"
+					},
+					{
+						"name": "Condition1",
+						"type": "varchar"
+					},
+					{
+						"name": "Condition2",
+						"type": "varchar"
+					},
+					{
+						"name": "BldgType",
+						"type": "varchar"
+					},
+					{
+						"name": "HouseStyle",
+						"type": "varchar"
+					},
+					{
+						"name": "OverallQual",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "OverallCond",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "YearBuilt",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "YearRemodAdd",
+						"type": "varchar"
+					},
+					{
+						"name": "RoofStyle",
+						"type": "varchar"
+					},
+					{
+						"name": "RoofMatl",
+						"type": "varchar"
+					},
+					{
+						"name": "Exterior1st",
+						"type": "varchar"
+					},
+					{
+						"name": "Exterior2nd",
+						"type": "varchar"
+					},
+					{
+						"name": "MasVnrType",
+						"type": "varchar"
+					},
+					{
+						"name": "MasVnrArea",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ExterQual",
+						"type": "varchar"
+					},
+					{
+						"name": "ExterCond",
+						"type": "varchar"
+					},
+					{
+						"name": "Foundation",
+						"type": "varchar"
+					},
+					{
+						"name": "BsmtQual",
+						"type": "varchar"
+					},
+					{
+						"name": "BsmtCond",
+						"type": "varchar"
+					},
+					{
+						"name": "BsmtExposure",
+						"type": "varchar"
+					},
+					{
+						"name": "BsmtFinType1",
+						"type": "varchar"
+					},
+					{
+						"name": "BsmtFinSF1",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "BsmtFinType2",
+						"type": "varchar"
+					},
+					{
+						"name": "BsmtFinSF2",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "BsmtUnfSF",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "TotalBsmtSF",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Heating",
+						"type": "varchar"
+					},
+					{
+						"name": "HeatingQC",
+						"type": "varchar"
+					},
+					{
+						"name": "CentralAir",
+						"type": "varchar"
+					},
+					{
+						"name": "Electrical",
+						"type": "varchar"
+					},
+					{
+						"name": "1stFlrSF",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "2ndFlrSF",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "LowQualFinSF",
+						"type": "varchar"
+					},
+					{
+						"name": "GrLivArea",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "BsmtFullBath",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "BsmtHalfBath",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "FullBath",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "HalfBath",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "BedroomAbvGr",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "KitchenAbvGr",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "KitchenQual",
+						"type": "varchar"
+					},
+					{
+						"name": "TotRmsAbvGrd",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Functional",
+						"type": "varchar"
+					},
+					{
+						"name": "Fireplaces",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "FireplaceQu",
+						"type": "varchar"
+					},
+					{
+						"name": "GarageType",
+						"type": "varchar"
+					},
+					{
+						"name": "GarageYrBlt",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "GarageFinish",
+						"type": "varchar"
+					},
+					{
+						"name": "GarageCars",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "GarageArea",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "GarageQual",
+						"type": "varchar"
+					},
+					{
+						"name": "GarageCond",
+						"type": "varchar"
+					},
+					{
+						"name": "PavedDrive",
+						"type": "varchar"
+					},
+					{
+						"name": "WoodDeckSF",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "OpenPorchSF",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "EnclosedPorch",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "3SsnPorch",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ScreenPorch",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PoolArea",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PoolQC",
+						"type": "varchar"
+					},
+					{
+						"name": "Fence",
+						"type": "varchar"
+					},
+					{
+						"name": "MiscFeature",
+						"type": "varchar"
+					},
+					{
+						"name": "MiscVal",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "MoSold",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "YrSold",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SaleType",
+						"type": "varchar"
+					},
+					{
+						"name": "SaleCondition",
+						"type": "varchar"
+					},
+					{
+						"name": "SalePrice",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "kaggle_train"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable4')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "UserId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Age",
+						"type": "varchar"
+					},
+					{
+						"name": "Address",
+						"type": "varchar"
+					},
+					{
+						"name": "Gender",
+						"type": "varchar"
+					},
+					{
+						"name": "UserType",
+						"type": "varchar"
+					},
+					{
+						"name": "Label",
+						"type": "varchar"
+					},
+					{
+						"name": "Total_Quantity",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Total_Value",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "StDev_Quantity",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "StDev_Value",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "AvgTimeDelta",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Recency",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Unique_TransactionId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Unique_ItemId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Unique_Location",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Unique_ProductCategory",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Total_Quantity_per_Unique_TransactionId",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Quantity_per_Unique_ItemId",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Quantity_per_Unique_Location",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Quantity_per_Unique_ProductCategory",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Value_per_Unique_TransactionId",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Value_per_Unique_ItemId",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Value_per_Unique_Location",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Value_per_Unique_ProductCategory",
+						"type": "float",
+						"precision": 15
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "retailchurn_train_adf"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		}
+	]
+}

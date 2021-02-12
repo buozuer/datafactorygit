@@ -1,0 +1,1461 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "colinsdemodatafactory"
+		},
+		"eventbasetrigger_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/b87e2be7-4cc5-4795-8350-017440510a83/resourceGroups/colinsdemo/providers/Microsoft.Storage/storageAccounts/colinsdemoblob"
+		},
+		"trigger1_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/b87e2be7-4cc5-4795-8350-017440510a83/resourceGroups/colinsdemo/providers/Microsoft.Storage/storageAccounts/colinsdemoblob"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/CopyPipeline_4u9')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy_4u9",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "dbo.nyctaxi_sample"
+							},
+							{
+								"name": "Destination",
+								"value": "dfstage//nytaxisample"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SourceDataset_4u9",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationDataset_4u9",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": [
+					"ingest"
+				],
+				"lastPublishTime": "2020-07-09T13:22:01Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CopyPipeline_i76')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy_i76",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "dbo.nyctaxi_sample"
+							},
+							{
+								"name": "Destination",
+								"value": "dfstage//nyctaxi_test_3"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SourceDataset_i76",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationDataset_i76",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": [],
+				"lastPublishTime": "2020-05-27T10:26:04Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CopyPipeline_sbd')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy_sbd",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "dbo.nyctaxi_sample"
+							},
+							{
+								"name": "Destination",
+								"value": "dfstage//"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SourceDataset_sbd",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationDataset_sbd",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": [],
+				"lastPublishTime": "2020-05-27T05:52:54Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CopyPipeline_wk3')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ForEach_wk3",
+						"type": "ForEach",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@pipeline().parameters.cw_items",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "Copy_wk3",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [
+										{
+											"name": "Source",
+											"value": "@{item().source.schema}.@{item().source.table}"
+										},
+										{
+											"name": "Destination",
+											"value": "adventureworks2019//@{item().destination.fileName}"
+										}
+									],
+									"typeProperties": {
+										"source": {
+											"type": "SqlServerSource",
+											"partitionOption": "None"
+										},
+										"sink": {
+											"type": "DelimitedTextSink",
+											"storeSettings": {
+												"type": "AzureBlobStorageWriteSettings"
+											},
+											"formatSettings": {
+												"type": "DelimitedTextWriteSettings",
+												"quoteAllText": true,
+												"fileExtension": ".txt"
+											}
+										},
+										"enableStaging": false,
+										"validateDataConsistency": false
+									},
+									"inputs": [
+										{
+											"referenceName": "SourceDataset_wk3",
+											"type": "DatasetReference",
+											"parameters": {
+												"cw_schema": "@item().source.schema",
+												"cw_table": "@item().source.table"
+											}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "DestinationDataset_wk3",
+											"type": "DatasetReference",
+											"parameters": {
+												"cw_fileName": "@item().destination.fileName"
+											}
+										}
+									]
+								}
+							]
+						}
+					}
+				],
+				"parameters": {
+					"cw_items": {
+						"type": "Array",
+						"defaultValue": [
+							{
+								"source": {
+									"schema": "dbo",
+									"table": "AWBuildVersion"
+								},
+								"destination": {
+									"fileName": "dboAWBuildVersion"
+								}
+							},
+							{
+								"source": {
+									"schema": "dbo",
+									"table": "DatabaseLog"
+								},
+								"destination": {
+									"fileName": "dboDatabaseLog"
+								}
+							},
+							{
+								"source": {
+									"schema": "dbo",
+									"table": "ErrorLog"
+								},
+								"destination": {
+									"fileName": "dboErrorLog"
+								}
+							},
+							{
+								"source": {
+									"schema": "HumanResources",
+									"table": "Department"
+								},
+								"destination": {
+									"fileName": "HumanResourcesDepartment"
+								}
+							},
+							{
+								"source": {
+									"schema": "HumanResources",
+									"table": "Employee"
+								},
+								"destination": {
+									"fileName": "HumanResourcesEmployee"
+								}
+							},
+							{
+								"source": {
+									"schema": "HumanResources",
+									"table": "EmployeeDepartmentHistory"
+								},
+								"destination": {
+									"fileName": "HumanResourcesEmployeeDepartmentHistory"
+								}
+							},
+							{
+								"source": {
+									"schema": "HumanResources",
+									"table": "EmployeePayHistory"
+								},
+								"destination": {
+									"fileName": "HumanResourcesEmployeePayHistory"
+								}
+							},
+							{
+								"source": {
+									"schema": "HumanResources",
+									"table": "JobCandidate"
+								},
+								"destination": {
+									"fileName": "HumanResourcesJobCandidate"
+								}
+							},
+							{
+								"source": {
+									"schema": "HumanResources",
+									"table": "Shift"
+								},
+								"destination": {
+									"fileName": "HumanResourcesShift"
+								}
+							},
+							{
+								"source": {
+									"schema": "Person",
+									"table": "Address"
+								},
+								"destination": {
+									"fileName": "PersonAddress"
+								}
+							},
+							{
+								"source": {
+									"schema": "Person",
+									"table": "AddressType"
+								},
+								"destination": {
+									"fileName": "PersonAddressType"
+								}
+							},
+							{
+								"source": {
+									"schema": "Person",
+									"table": "BusinessEntity"
+								},
+								"destination": {
+									"fileName": "PersonBusinessEntity"
+								}
+							},
+							{
+								"source": {
+									"schema": "Person",
+									"table": "BusinessEntityAddress"
+								},
+								"destination": {
+									"fileName": "PersonBusinessEntityAddress"
+								}
+							},
+							{
+								"source": {
+									"schema": "Person",
+									"table": "BusinessEntityContact"
+								},
+								"destination": {
+									"fileName": "PersonBusinessEntityContact"
+								}
+							},
+							{
+								"source": {
+									"schema": "Person",
+									"table": "ContactType"
+								},
+								"destination": {
+									"fileName": "PersonContactType"
+								}
+							},
+							{
+								"source": {
+									"schema": "Person",
+									"table": "CountryRegion"
+								},
+								"destination": {
+									"fileName": "PersonCountryRegion"
+								}
+							},
+							{
+								"source": {
+									"schema": "Person",
+									"table": "EmailAddress"
+								},
+								"destination": {
+									"fileName": "PersonEmailAddress"
+								}
+							},
+							{
+								"source": {
+									"schema": "Person",
+									"table": "Password"
+								},
+								"destination": {
+									"fileName": "PersonPassword"
+								}
+							},
+							{
+								"source": {
+									"schema": "Person",
+									"table": "Person"
+								},
+								"destination": {
+									"fileName": "PersonPerson"
+								}
+							},
+							{
+								"source": {
+									"schema": "Person",
+									"table": "PersonPhone"
+								},
+								"destination": {
+									"fileName": "PersonPersonPhone"
+								}
+							},
+							{
+								"source": {
+									"schema": "Person",
+									"table": "PhoneNumberType"
+								},
+								"destination": {
+									"fileName": "PersonPhoneNumberType"
+								}
+							},
+							{
+								"source": {
+									"schema": "Person",
+									"table": "StateProvince"
+								},
+								"destination": {
+									"fileName": "PersonStateProvince"
+								}
+							},
+							{
+								"source": {
+									"schema": "Production",
+									"table": "BillOfMaterials"
+								},
+								"destination": {
+									"fileName": "ProductionBillOfMaterials"
+								}
+							},
+							{
+								"source": {
+									"schema": "Production",
+									"table": "Culture"
+								},
+								"destination": {
+									"fileName": "ProductionCulture"
+								}
+							},
+							{
+								"source": {
+									"schema": "Production",
+									"table": "Document"
+								},
+								"destination": {
+									"fileName": "ProductionDocument"
+								}
+							},
+							{
+								"source": {
+									"schema": "Production",
+									"table": "Illustration"
+								},
+								"destination": {
+									"fileName": "ProductionIllustration"
+								}
+							},
+							{
+								"source": {
+									"schema": "Production",
+									"table": "Location"
+								},
+								"destination": {
+									"fileName": "ProductionLocation"
+								}
+							},
+							{
+								"source": {
+									"schema": "Production",
+									"table": "Product"
+								},
+								"destination": {
+									"fileName": "ProductionProduct"
+								}
+							},
+							{
+								"source": {
+									"schema": "Production",
+									"table": "ProductCategory"
+								},
+								"destination": {
+									"fileName": "ProductionProductCategory"
+								}
+							},
+							{
+								"source": {
+									"schema": "Production",
+									"table": "ProductCostHistory"
+								},
+								"destination": {
+									"fileName": "ProductionProductCostHistory"
+								}
+							},
+							{
+								"source": {
+									"schema": "Production",
+									"table": "ProductDescription"
+								},
+								"destination": {
+									"fileName": "ProductionProductDescription"
+								}
+							},
+							{
+								"source": {
+									"schema": "Production",
+									"table": "ProductDocument"
+								},
+								"destination": {
+									"fileName": "ProductionProductDocument"
+								}
+							},
+							{
+								"source": {
+									"schema": "Production",
+									"table": "ProductInventory"
+								},
+								"destination": {
+									"fileName": "ProductionProductInventory"
+								}
+							},
+							{
+								"source": {
+									"schema": "Production",
+									"table": "ProductListPriceHistory"
+								},
+								"destination": {
+									"fileName": "ProductionProductListPriceHistory"
+								}
+							},
+							{
+								"source": {
+									"schema": "Production",
+									"table": "ProductModel"
+								},
+								"destination": {
+									"fileName": "ProductionProductModel"
+								}
+							},
+							{
+								"source": {
+									"schema": "Production",
+									"table": "ProductModelIllustration"
+								},
+								"destination": {
+									"fileName": "ProductionProductModelIllustration"
+								}
+							},
+							{
+								"source": {
+									"schema": "Production",
+									"table": "ProductModelProductDescriptionCulture"
+								},
+								"destination": {
+									"fileName": "ProductionProductModelProductDescriptionCulture"
+								}
+							},
+							{
+								"source": {
+									"schema": "Production",
+									"table": "ProductPhoto"
+								},
+								"destination": {
+									"fileName": "ProductionProductPhoto"
+								}
+							},
+							{
+								"source": {
+									"schema": "Production",
+									"table": "ProductProductPhoto"
+								},
+								"destination": {
+									"fileName": "ProductionProductProductPhoto"
+								}
+							},
+							{
+								"source": {
+									"schema": "Production",
+									"table": "ProductReview"
+								},
+								"destination": {
+									"fileName": "ProductionProductReview"
+								}
+							},
+							{
+								"source": {
+									"schema": "Production",
+									"table": "ProductSubcategory"
+								},
+								"destination": {
+									"fileName": "ProductionProductSubcategory"
+								}
+							},
+							{
+								"source": {
+									"schema": "Production",
+									"table": "ScrapReason"
+								},
+								"destination": {
+									"fileName": "ProductionScrapReason"
+								}
+							},
+							{
+								"source": {
+									"schema": "Production",
+									"table": "TransactionHistory"
+								},
+								"destination": {
+									"fileName": "ProductionTransactionHistory"
+								}
+							},
+							{
+								"source": {
+									"schema": "Production",
+									"table": "TransactionHistoryArchive"
+								},
+								"destination": {
+									"fileName": "ProductionTransactionHistoryArchive"
+								}
+							},
+							{
+								"source": {
+									"schema": "Production",
+									"table": "UnitMeasure"
+								},
+								"destination": {
+									"fileName": "ProductionUnitMeasure"
+								}
+							},
+							{
+								"source": {
+									"schema": "Production",
+									"table": "WorkOrder"
+								},
+								"destination": {
+									"fileName": "ProductionWorkOrder"
+								}
+							},
+							{
+								"source": {
+									"schema": "Production",
+									"table": "WorkOrderRouting"
+								},
+								"destination": {
+									"fileName": "ProductionWorkOrderRouting"
+								}
+							},
+							{
+								"source": {
+									"schema": "Purchasing",
+									"table": "ProductVendor"
+								},
+								"destination": {
+									"fileName": "PurchasingProductVendor"
+								}
+							},
+							{
+								"source": {
+									"schema": "Purchasing",
+									"table": "PurchaseOrderDetail"
+								},
+								"destination": {
+									"fileName": "PurchasingPurchaseOrderDetail"
+								}
+							},
+							{
+								"source": {
+									"schema": "Purchasing",
+									"table": "PurchaseOrderHeader"
+								},
+								"destination": {
+									"fileName": "PurchasingPurchaseOrderHeader"
+								}
+							},
+							{
+								"source": {
+									"schema": "Purchasing",
+									"table": "ShipMethod"
+								},
+								"destination": {
+									"fileName": "PurchasingShipMethod"
+								}
+							},
+							{
+								"source": {
+									"schema": "Purchasing",
+									"table": "Vendor"
+								},
+								"destination": {
+									"fileName": "PurchasingVendor"
+								}
+							},
+							{
+								"source": {
+									"schema": "Sales",
+									"table": "CountryRegionCurrency"
+								},
+								"destination": {
+									"fileName": "SalesCountryRegionCurrency"
+								}
+							},
+							{
+								"source": {
+									"schema": "Sales",
+									"table": "CreditCard"
+								},
+								"destination": {
+									"fileName": "SalesCreditCard"
+								}
+							},
+							{
+								"source": {
+									"schema": "Sales",
+									"table": "Currency"
+								},
+								"destination": {
+									"fileName": "SalesCurrency"
+								}
+							},
+							{
+								"source": {
+									"schema": "Sales",
+									"table": "CurrencyRate"
+								},
+								"destination": {
+									"fileName": "SalesCurrencyRate"
+								}
+							},
+							{
+								"source": {
+									"schema": "Sales",
+									"table": "Customer"
+								},
+								"destination": {
+									"fileName": "SalesCustomer"
+								}
+							},
+							{
+								"source": {
+									"schema": "Sales",
+									"table": "PersonCreditCard"
+								},
+								"destination": {
+									"fileName": "SalesPersonCreditCard"
+								}
+							},
+							{
+								"source": {
+									"schema": "Sales",
+									"table": "SalesOrderDetail"
+								},
+								"destination": {
+									"fileName": "SalesSalesOrderDetail"
+								}
+							},
+							{
+								"source": {
+									"schema": "Sales",
+									"table": "SalesOrderHeader"
+								},
+								"destination": {
+									"fileName": "SalesSalesOrderHeader"
+								}
+							},
+							{
+								"source": {
+									"schema": "Sales",
+									"table": "SalesOrderHeaderSalesReason"
+								},
+								"destination": {
+									"fileName": "SalesSalesOrderHeaderSalesReason"
+								}
+							},
+							{
+								"source": {
+									"schema": "Sales",
+									"table": "SalesPerson"
+								},
+								"destination": {
+									"fileName": "SalesSalesPerson"
+								}
+							},
+							{
+								"source": {
+									"schema": "Sales",
+									"table": "SalesPersonQuotaHistory"
+								},
+								"destination": {
+									"fileName": "SalesSalesPersonQuotaHistory"
+								}
+							},
+							{
+								"source": {
+									"schema": "Sales",
+									"table": "SalesReason"
+								},
+								"destination": {
+									"fileName": "SalesSalesReason"
+								}
+							},
+							{
+								"source": {
+									"schema": "Sales",
+									"table": "SalesTaxRate"
+								},
+								"destination": {
+									"fileName": "SalesSalesTaxRate"
+								}
+							},
+							{
+								"source": {
+									"schema": "Sales",
+									"table": "SalesTerritory"
+								},
+								"destination": {
+									"fileName": "SalesSalesTerritory"
+								}
+							},
+							{
+								"source": {
+									"schema": "Sales",
+									"table": "SalesTerritoryHistory"
+								},
+								"destination": {
+									"fileName": "SalesSalesTerritoryHistory"
+								}
+							},
+							{
+								"source": {
+									"schema": "Sales",
+									"table": "ShoppingCartItem"
+								},
+								"destination": {
+									"fileName": "SalesShoppingCartItem"
+								}
+							},
+							{
+								"source": {
+									"schema": "Sales",
+									"table": "SpecialOffer"
+								},
+								"destination": {
+									"fileName": "SalesSpecialOffer"
+								}
+							},
+							{
+								"source": {
+									"schema": "Sales",
+									"table": "SpecialOfferProduct"
+								},
+								"destination": {
+									"fileName": "SalesSpecialOfferProduct"
+								}
+							},
+							{
+								"source": {
+									"schema": "Sales",
+									"table": "Store"
+								},
+								"destination": {
+									"fileName": "SalesStore"
+								}
+							}
+						]
+					}
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-02-04T06:24:05Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CopyPipeline_zul')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy_zul",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "dbo.nyctaxi_sample"
+							},
+							{
+								"name": "Destination",
+								"value": "ustunberk//"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SourceDataset_zul",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationDataset_zul",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": [],
+				"lastPublishTime": "2020-04-28T11:06:20Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Retailchurnpipeline')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "retailchurndemo",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "retailchurndemo",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"source1": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"annotations": [
+					"retailchurndemo"
+				],
+				"lastPublishTime": "2020-08-18T08:14:36Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/copydata_nyctaxi')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy_wuh",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "dbo.nyctaxi_sample"
+							},
+							{
+								"name": "Destination",
+								"value": "dfstage//"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SourceDataset_wuh",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationDataset_wuh",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": [
+					"ingest"
+				],
+				"lastPublishTime": "2020-07-09T13:21:12Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/demoactivity')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy_zbi",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "dbo.customer_table"
+							},
+							{
+								"name": "Destination",
+								"value": "adventureworks2019new//"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"validateDataConsistency": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SourceDataset_zbi",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationDataset_zbi",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": [],
+				"lastPublishTime": "2021-02-04T09:41:50Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ustunberkcopydata')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "from dsvm",
+				"activities": [
+					{
+						"name": "Copy_3fd",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "dbo.nyctaxi_sample"
+							},
+							{
+								"name": "Destination",
+								"value": "ustunberk//"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SourceDataset_3fd",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationDataset_3fd",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": [],
+				"lastPublishTime": "2020-04-28T08:31:19Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ustunberkdemo_copydata_1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Copy data from DSVM",
+				"activities": [
+					{
+						"name": "Copy_uvi",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "dbo.nyctaxi_sample"
+							},
+							{
+								"name": "Destination",
+								"value": "ustunberk//"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SourceDataset_uvi",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationDataset_uvi",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": [],
+				"lastPublishTime": "2020-04-28T07:48:41Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ustunberkdemocopydatafromdsvm')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy_2sh",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "dbo.nyctaxi_sample"
+							},
+							{
+								"name": "Destination",
+								"value": "ustunberk//"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SourceDataset_2sh",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationDataset_2sh",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": [],
+				"lastPublishTime": "2020-04-28T08:29:04Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/eventbasetrigger')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [
+					"retailchurndemo"
+				],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "Retailchurnpipeline",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/eventtriggerdemo/blobs/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('eventbasetrigger_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/Retailchurnpipeline')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trigger1')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [
+					"retailchurndemo"
+				],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "Retailchurnpipeline",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/eventtriggerdemo/blobs/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('trigger1_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated",
+						"Microsoft.Storage.BlobDeleted"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/Retailchurnpipeline')]"
+			]
+		}
+	]
+}

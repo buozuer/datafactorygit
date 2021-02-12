@@ -1,0 +1,1751 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "colinsdemodatafactory"
+		},
+		"DSVM_CONNECTION_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'DSVM_CONNECTION'"
+		},
+		"DSVM_CONNECTION_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'DSVM_CONNECTION'"
+		},
+		"DSVM_SQLSERVER_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'DSVM_SQLSERVER'"
+		},
+		"DSVM_SQLSERVER_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'DSVM_SQLSERVER'"
+		},
+		"SourceDataset_ibi_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "jobs_clustered.json"
+		},
+		"SourceDataset_ibi_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "burakblob"
+		},
+		"SourceDataset_q7y_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "example_1.json"
+		},
+		"SourceDataset_q7y_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "burakblob"
+		},
+		"DSVM_CONNECTION_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "BURAK_ML_DEMO"
+		},
+		"DSVM_SQLSERVER_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "datasciencevm"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationDataset_wk3')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "burakblobconnection",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"cw_fileName": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": {
+							"value": "@dataset().cw_fileName",
+							"type": "Expression"
+						},
+						"container": "adventureworks2019"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationDataset_wuh')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "burakblobconnection",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "dfstage"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationDataset_xie')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "burakblobconnection",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "burakblob"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationDataset_yqa')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "OnurAir_ML",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Ucusun_Gerceklestigi_Ay",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "Ucusun_Gun_Grubu",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "Ucus_Vakti_Kalkis",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "Ucus_Vakti_Varis",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "Rota",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "Kalkis_Havalimani",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "Inis_Havalimani",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "Departure_Country",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "Arrival_Country",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "Acil_Inis_Meydani",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "Ucak_Kuyruk_Kodu",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "Ucak_Tipi",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "Yolcu_Kapasitesi",
+						"type": "int",
+						"precision": 10,
+						"scale": 0
+					},
+					{
+						"name": "Ekip_Sayisi",
+						"type": "int",
+						"precision": 10,
+						"scale": 0
+					},
+					{
+						"name": "Toplam_Yolcu_Sayisi",
+						"type": "int",
+						"precision": 10,
+						"scale": 0
+					},
+					{
+						"name": "Ucagin_Havada_Kalma_Suresi",
+						"type": "int",
+						"precision": 10,
+						"scale": 0
+					},
+					{
+						"name": "Ucagin_Havada_Kalma_Suresi_ex",
+						"type": "int",
+						"precision": 10,
+						"scale": 0
+					},
+					{
+						"name": "Kus_Bakisi_Mesafe",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "Ucagin_Mak_Kalkis_Agirligi",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "Yakit_Tuketim_Ortalamasi",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "Scored_Labels",
+						"type": "float",
+						"precision": 53,
+						"scale": 0
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "OnurAir_ML_Scored"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationDataset_zbi')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "burakblobconnection",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "adventureworks2019new"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationDataset_zul')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "burakblobconnection",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "ustunberk"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Json1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "cogsearchblob",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "118497 79828 (2).pdf.labels.json",
+						"container": "formreqtrainlabeled"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"document": {
+							"type": "string"
+						},
+						"labels": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"label": {
+										"type": "string"
+									},
+									"key": {
+										"type": "null"
+									},
+									"value": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"page": {
+													"type": "integer"
+												},
+												"text": {
+													"type": "string"
+												},
+												"boundingBoxes": {
+													"type": "array",
+													"items": {
+														"type": "array",
+														"items": {
+															"type": "number"
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SinkDataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BURAK_DEMO_DB",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"SinkTableName": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": {
+						"value": "@dataset().SinkTableName",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_9m6')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "cogsearchblob",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Sheet1",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "AzureDB.xlsx",
+						"container": "elementcogsearch"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "ServiceName",
+						"type": "String"
+					},
+					{
+						"name": "ServiceType",
+						"type": "String"
+					},
+					{
+						"name": "Capability",
+						"type": "String"
+					},
+					{
+						"name": "HierarchyLevelLowest",
+						"type": "String"
+					},
+					{
+						"name": "HierarchyLevel4",
+						"type": "String"
+					},
+					{
+						"name": "HierarchyLevel3",
+						"type": "String"
+					},
+					{
+						"name": "HierarchyLevel2",
+						"type": "String"
+					},
+					{
+						"name": "HierarchyLevel1",
+						"type": "String"
+					},
+					{
+						"name": "Specification",
+						"type": "String"
+					},
+					{
+						"name": "Material",
+						"type": "String"
+					},
+					{
+						"name": "LabName",
+						"type": "String"
+					},
+					{
+						"name": "Country",
+						"type": "String"
+					},
+					{
+						"name": "Continent",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_c7r')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "burakblobconnection",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "train.csv",
+						"container": "burakblob"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Id"
+					},
+					{
+						"name": "MSSubClass"
+					},
+					{
+						"name": "MSZoning"
+					},
+					{
+						"name": "LotFrontage"
+					},
+					{
+						"name": "LotArea"
+					},
+					{
+						"name": "Street"
+					},
+					{
+						"name": "Alley"
+					},
+					{
+						"name": "LotShape"
+					},
+					{
+						"name": "LandContour"
+					},
+					{
+						"name": "Utilities"
+					},
+					{
+						"name": "LotConfig"
+					},
+					{
+						"name": "LandSlope"
+					},
+					{
+						"name": "Neighborhood"
+					},
+					{
+						"name": "Condition1"
+					},
+					{
+						"name": "Condition2"
+					},
+					{
+						"name": "BldgType"
+					},
+					{
+						"name": "HouseStyle"
+					},
+					{
+						"name": "OverallQual"
+					},
+					{
+						"name": "OverallCond"
+					},
+					{
+						"name": "YearBuilt"
+					},
+					{
+						"name": "YearRemodAdd"
+					},
+					{
+						"name": "RoofStyle"
+					},
+					{
+						"name": "RoofMatl"
+					},
+					{
+						"name": "Exterior1st"
+					},
+					{
+						"name": "Exterior2nd"
+					},
+					{
+						"name": "MasVnrType"
+					},
+					{
+						"name": "MasVnrArea"
+					},
+					{
+						"name": "ExterQual"
+					},
+					{
+						"name": "ExterCond"
+					},
+					{
+						"name": "Foundation"
+					},
+					{
+						"name": "BsmtQual"
+					},
+					{
+						"name": "BsmtCond"
+					},
+					{
+						"name": "BsmtExposure"
+					},
+					{
+						"name": "BsmtFinType1"
+					},
+					{
+						"name": "BsmtFinSF1"
+					},
+					{
+						"name": "BsmtFinType2"
+					},
+					{
+						"name": "BsmtFinSF2"
+					},
+					{
+						"name": "BsmtUnfSF"
+					},
+					{
+						"name": "TotalBsmtSF"
+					},
+					{
+						"name": "Heating"
+					},
+					{
+						"name": "HeatingQC"
+					},
+					{
+						"name": "CentralAir"
+					},
+					{
+						"name": "Electrical"
+					},
+					{
+						"name": "1stFlrSF"
+					},
+					{
+						"name": "2ndFlrSF"
+					},
+					{
+						"name": "LowQualFinSF"
+					},
+					{
+						"name": "GrLivArea"
+					},
+					{
+						"name": "BsmtFullBath"
+					},
+					{
+						"name": "BsmtHalfBath"
+					},
+					{
+						"name": "FullBath"
+					},
+					{
+						"name": "HalfBath"
+					},
+					{
+						"name": "BedroomAbvGr"
+					},
+					{
+						"name": "KitchebvGr"
+					},
+					{
+						"name": "KitchenQual"
+					},
+					{
+						"name": "TotRmsAbvGrd"
+					},
+					{
+						"name": "Functiol"
+					},
+					{
+						"name": "Fireplaces"
+					},
+					{
+						"name": "FireplaceQu"
+					},
+					{
+						"name": "GarageType"
+					},
+					{
+						"name": "GarageYrBlt"
+					},
+					{
+						"name": "GarageFinish"
+					},
+					{
+						"name": "GarageCars"
+					},
+					{
+						"name": "GarageArea"
+					},
+					{
+						"name": "GarageQual"
+					},
+					{
+						"name": "GarageCond"
+					},
+					{
+						"name": "PavedDrive"
+					},
+					{
+						"name": "WoodDeckSF"
+					},
+					{
+						"name": "OpenPorchSF"
+					},
+					{
+						"name": "EnclosedPorch"
+					},
+					{
+						"name": "3SsnPorch"
+					},
+					{
+						"name": "ScreenPorch"
+					},
+					{
+						"name": "PoolArea"
+					},
+					{
+						"name": "PoolQC"
+					},
+					{
+						"name": "Fence"
+					},
+					{
+						"name": "MiscFeature"
+					},
+					{
+						"name": "MiscVal"
+					},
+					{
+						"name": "MoSold"
+					},
+					{
+						"name": "YrSold"
+					},
+					{
+						"name": "SaleType"
+					},
+					{
+						"name": "SaleCondition"
+					},
+					{
+						"name": "SalePrice"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_gtr')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "burakblobconnection",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "train.csv",
+						"container": "burakblob"
+					},
+					"columnDelimiter": ",",
+					"rowDelimiter": "\n",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Id"
+					},
+					{
+						"name": "MSSubClass"
+					},
+					{
+						"name": "MSZoning"
+					},
+					{
+						"name": "LotFrontage"
+					},
+					{
+						"name": "LotArea"
+					},
+					{
+						"name": "Street"
+					},
+					{
+						"name": "Alley"
+					},
+					{
+						"name": "LotShape"
+					},
+					{
+						"name": "LandContour"
+					},
+					{
+						"name": "Utilities"
+					},
+					{
+						"name": "LotConfig"
+					},
+					{
+						"name": "LandSlope"
+					},
+					{
+						"name": "Neighborhood"
+					},
+					{
+						"name": "Condition1"
+					},
+					{
+						"name": "Condition2"
+					},
+					{
+						"name": "BldgType"
+					},
+					{
+						"name": "HouseStyle"
+					},
+					{
+						"name": "OverallQual"
+					},
+					{
+						"name": "OverallCond"
+					},
+					{
+						"name": "YearBuilt"
+					},
+					{
+						"name": "YearRemodAdd"
+					},
+					{
+						"name": "RoofStyle"
+					},
+					{
+						"name": "RoofMatl"
+					},
+					{
+						"name": "Exterior1st"
+					},
+					{
+						"name": "Exterior2nd"
+					},
+					{
+						"name": "MasVnrType"
+					},
+					{
+						"name": "MasVnrArea"
+					},
+					{
+						"name": "ExterQual"
+					},
+					{
+						"name": "ExterCond"
+					},
+					{
+						"name": "Foundation"
+					},
+					{
+						"name": "BsmtQual"
+					},
+					{
+						"name": "BsmtCond"
+					},
+					{
+						"name": "BsmtExposure"
+					},
+					{
+						"name": "BsmtFinType1"
+					},
+					{
+						"name": "BsmtFinSF1"
+					},
+					{
+						"name": "BsmtFinType2"
+					},
+					{
+						"name": "BsmtFinSF2"
+					},
+					{
+						"name": "BsmtUnfSF"
+					},
+					{
+						"name": "TotalBsmtSF"
+					},
+					{
+						"name": "Heating"
+					},
+					{
+						"name": "HeatingQC"
+					},
+					{
+						"name": "CentralAir"
+					},
+					{
+						"name": "Electrical"
+					},
+					{
+						"name": "1stFlrSF"
+					},
+					{
+						"name": "2ndFlrSF"
+					},
+					{
+						"name": "LowQualFinSF"
+					},
+					{
+						"name": "GrLivArea"
+					},
+					{
+						"name": "BsmtFullBath"
+					},
+					{
+						"name": "BsmtHalfBath"
+					},
+					{
+						"name": "FullBath"
+					},
+					{
+						"name": "HalfBath"
+					},
+					{
+						"name": "BedroomAbvGr"
+					},
+					{
+						"name": "KitchenAbvGr"
+					},
+					{
+						"name": "KitchenQual"
+					},
+					{
+						"name": "TotRmsAbvGrd"
+					},
+					{
+						"name": "Functional"
+					},
+					{
+						"name": "Fireplaces"
+					},
+					{
+						"name": "FireplaceQu"
+					},
+					{
+						"name": "GarageType"
+					},
+					{
+						"name": "GarageYrBlt"
+					},
+					{
+						"name": "GarageFinish"
+					},
+					{
+						"name": "GarageCars"
+					},
+					{
+						"name": "GarageArea"
+					},
+					{
+						"name": "GarageQual"
+					},
+					{
+						"name": "GarageCond"
+					},
+					{
+						"name": "PavedDrive"
+					},
+					{
+						"name": "WoodDeckSF"
+					},
+					{
+						"name": "OpenPorchSF"
+					},
+					{
+						"name": "EnclosedPorch"
+					},
+					{
+						"name": "3SsnPorch"
+					},
+					{
+						"name": "ScreenPorch"
+					},
+					{
+						"name": "PoolArea"
+					},
+					{
+						"name": "PoolQC"
+					},
+					{
+						"name": "Fence"
+					},
+					{
+						"name": "MiscFeature"
+					},
+					{
+						"name": "MiscVal"
+					},
+					{
+						"name": "MoSold"
+					},
+					{
+						"name": "YrSold"
+					},
+					{
+						"name": "SaleType"
+					},
+					{
+						"name": "SaleCondition"
+					},
+					{
+						"name": "SalePrice"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_hhq')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "burakblobconnection",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "train.csv",
+						"container": "burakblob"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Id"
+					},
+					{
+						"name": "MSSubClass"
+					},
+					{
+						"name": "MSZoning"
+					},
+					{
+						"name": "LotFrontage"
+					},
+					{
+						"name": "LotArea"
+					},
+					{
+						"name": "Street"
+					},
+					{
+						"name": "Alley"
+					},
+					{
+						"name": "LotShape"
+					},
+					{
+						"name": "LandContour"
+					},
+					{
+						"name": "Utilities"
+					},
+					{
+						"name": "LotConfig"
+					},
+					{
+						"name": "LandSlope"
+					},
+					{
+						"name": "Neighborhood"
+					},
+					{
+						"name": "Condition1"
+					},
+					{
+						"name": "Condition2"
+					},
+					{
+						"name": "BldgType"
+					},
+					{
+						"name": "HouseStyle"
+					},
+					{
+						"name": "OverallQual"
+					},
+					{
+						"name": "OverallCond"
+					},
+					{
+						"name": "YearBuilt"
+					},
+					{
+						"name": "YearRemodAdd"
+					},
+					{
+						"name": "RoofStyle"
+					},
+					{
+						"name": "RoofMatl"
+					},
+					{
+						"name": "Exterior1st"
+					},
+					{
+						"name": "Exterior2nd"
+					},
+					{
+						"name": "MasVnrType"
+					},
+					{
+						"name": "MasVnrArea"
+					},
+					{
+						"name": "ExterQual"
+					},
+					{
+						"name": "ExterCond"
+					},
+					{
+						"name": "Foundation"
+					},
+					{
+						"name": "BsmtQual"
+					},
+					{
+						"name": "BsmtCond"
+					},
+					{
+						"name": "BsmtExposure"
+					},
+					{
+						"name": "BsmtFinType1"
+					},
+					{
+						"name": "BsmtFinSF1"
+					},
+					{
+						"name": "BsmtFinType2"
+					},
+					{
+						"name": "BsmtFinSF2"
+					},
+					{
+						"name": "BsmtUnfSF"
+					},
+					{
+						"name": "TotalBsmtSF"
+					},
+					{
+						"name": "Heating"
+					},
+					{
+						"name": "HeatingQC"
+					},
+					{
+						"name": "CentralAir"
+					},
+					{
+						"name": "Electrical"
+					},
+					{
+						"name": "1stFlrSF"
+					},
+					{
+						"name": "2ndFlrSF"
+					},
+					{
+						"name": "LowQualFinSF"
+					},
+					{
+						"name": "GrLivArea"
+					},
+					{
+						"name": "BsmtFullBath"
+					},
+					{
+						"name": "BsmtHalfBath"
+					},
+					{
+						"name": "FullBath"
+					},
+					{
+						"name": "HalfBath"
+					},
+					{
+						"name": "BedroomAbvGr"
+					},
+					{
+						"name": "KitchebvGr"
+					},
+					{
+						"name": "KitchenQual"
+					},
+					{
+						"name": "TotRmsAbvGrd"
+					},
+					{
+						"name": "Functiol"
+					},
+					{
+						"name": "Fireplaces"
+					},
+					{
+						"name": "FireplaceQu"
+					},
+					{
+						"name": "GarageType"
+					},
+					{
+						"name": "GarageYrBlt"
+					},
+					{
+						"name": "GarageFinish"
+					},
+					{
+						"name": "GarageCars"
+					},
+					{
+						"name": "GarageArea"
+					},
+					{
+						"name": "GarageQual"
+					},
+					{
+						"name": "GarageCond"
+					},
+					{
+						"name": "PavedDrive"
+					},
+					{
+						"name": "WoodDeckSF"
+					},
+					{
+						"name": "OpenPorchSF"
+					},
+					{
+						"name": "EnclosedPorch"
+					},
+					{
+						"name": "3SsnPorch"
+					},
+					{
+						"name": "ScreenPorch"
+					},
+					{
+						"name": "PoolArea"
+					},
+					{
+						"name": "PoolQC"
+					},
+					{
+						"name": "Fence"
+					},
+					{
+						"name": "MiscFeature"
+					},
+					{
+						"name": "MiscVal"
+					},
+					{
+						"name": "MoSold"
+					},
+					{
+						"name": "YrSold"
+					},
+					{
+						"name": "SaleType"
+					},
+					{
+						"name": "SaleCondition"
+					},
+					{
+						"name": "SalePrice"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_ibi')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage14",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureBlob",
+				"structure": [
+					{
+						"name": "cluster_list",
+						"type": "String"
+					},
+					{
+						"name": "status.code",
+						"type": "String"
+					},
+					{
+						"name": "status.msg",
+						"type": "String"
+					},
+					{
+						"name": "status.credits",
+						"type": "String"
+					},
+					{
+						"name": "status.remaining_credits",
+						"type": "String"
+					}
+				],
+				"typeProperties": {
+					"format": {
+						"type": "JsonFormat",
+						"filePattern": "setOfObjects",
+						"jsonPathDefinition": {
+							"cluster_list": "$.['cluster_list']",
+							"status.code": "$.['status']['code']",
+							"status.msg": "$.['status']['msg']",
+							"status.credits": "$.['status']['credits']",
+							"status.remaining_credits": "$.['status']['remaining_credits']"
+						}
+					},
+					"fileName": "[parameters('SourceDataset_ibi_properties_typeProperties_fileName')]",
+					"folderPath": "[parameters('SourceDataset_ibi_properties_typeProperties_folderPath')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_q7y')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage14",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureBlob",
+				"structure": [
+					{
+						"name": "fruit",
+						"type": "String"
+					},
+					{
+						"name": "size",
+						"type": "String"
+					},
+					{
+						"name": "color",
+						"type": "String"
+					}
+				],
+				"typeProperties": {
+					"format": {
+						"type": "JsonFormat",
+						"filePattern": "setOfObjects",
+						"jsonPathDefinition": {
+							"fruit": "$.['fruit']",
+							"size": "$.['size']",
+							"color": "$.['color']"
+						}
+					},
+					"fileName": "[parameters('SourceDataset_q7y_properties_typeProperties_fileName')]",
+					"folderPath": "[parameters('SourceDataset_q7y_properties_typeProperties_folderPath')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_xie')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "burakblobconnection",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "CRMChurnData.csv",
+						"container": "burakblob"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Customer",
+						"type": "String"
+					},
+					{
+						"name": "GOZLEM_TARIHI",
+						"type": "String"
+					},
+					{
+						"name": "CHURN",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_yqa')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "onurairml_scoreddata",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "data.dataset.parquet",
+						"folderPath": "azureml/83761bd2-ed25-4b3d-b5d1-bff000398d85/Scored_dataset",
+						"container": "azureml-blobstore-d485de1e-bee0-44a1-8091-7417e6f5959c"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/WatermarkDataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BURAK_DEMO_DB",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "watermarktable"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DSVM_CONNECTION')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('DSVM_CONNECTION_connectionString')]",
+					"userName": "[parameters('DSVM_CONNECTION_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('DSVM_CONNECTION_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "BURAKMLDSVM",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DSVM_SQLSERVER')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('DSVM_SQLSERVER_connectionString')]",
+					"userName": "[parameters('DSVM_SQLSERVER_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('DSVM_SQLSERVER_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "dsvmselfhosted",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CopyPipeline_9m6')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy_9m6",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "elementcogsearch//AzureDB.xlsx"
+							},
+							{
+								"name": "Destination",
+								"value": ".Azure Blob Storage file"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "ExcelSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								}
+							},
+							"sink": {
+								"type": "SqlDWSink",
+								"allowPolyBase": true,
+								"polyBaseSettings": {
+									"rejectValue": 0,
+									"rejectType": "value",
+									"useTypeDefault": true
+								},
+								"tableOption": "autoCreate",
+								"disableMetricsCollection": true
+							},
+							"enableStaging": false,
+							"enableSkipIncompatibleRow": true,
+							"logSettings": {
+								"enableCopyActivityLog": true,
+								"copyActivityLogSettings": {
+									"logLevel": "Warning",
+									"enableReliableLogging": false
+								},
+								"logLocationSettings": {
+									"linkedServiceName": {
+										"referenceName": "cogsearchblob",
+										"type": "LinkedServiceReference"
+									}
+								}
+							},
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "ServiceName",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ServiceName",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ServiceType",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ServiceType",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Capability",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Capability",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "HierarchyLevelLowest",
+											"type": "String"
+										},
+										"sink": {
+											"name": "HierarchyLevelLowest",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "HierarchyLevel4",
+											"type": "String"
+										},
+										"sink": {
+											"name": "HierarchyLevel4",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "HierarchyLevel3",
+											"type": "String"
+										},
+										"sink": {
+											"name": "HierarchyLevel3",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "HierarchyLevel2",
+											"type": "String"
+										},
+										"sink": {
+											"name": "HierarchyLevel2",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "HierarchyLevel1",
+											"type": "String"
+										},
+										"sink": {
+											"name": "HierarchyLevel1",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Specification",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Specification",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Material",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Material",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "LabName",
+											"type": "String"
+										},
+										"sink": {
+											"name": "LabName",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Country",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Country",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Continent",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Continent",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SourceDataset_9m6",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationDataset_9m6",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": [],
+				"lastPublishTime": "2020-12-07T05:33:18Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/SourceDataset_9m6')]"
+			]
+		}
+	]
+}
