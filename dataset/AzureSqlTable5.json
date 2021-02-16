@@ -1,0 +1,29 @@
+{
+	"name": "AzureSqlTable5",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BURAK_DEMO_DB",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Customer",
+				"type": "varchar"
+			},
+			{
+				"name": "GOZLEM_TARIHI",
+				"type": "varchar"
+			},
+			{
+				"name": "CHURN",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "CRMChurnData"
+		}
+	}
+}
