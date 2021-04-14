@@ -1,0 +1,364 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "colinsdemodatafactory"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/NYTX_DF_DEMO')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "DF_DEMO_NYCTX",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "DF_DEMO_NYCTX",
+								"type": "DataFlowReference"
+							},
+							"staging": {
+								"linkedService": {
+									"referenceName": "linkedService1",
+									"type": "LinkedServiceReference"
+								},
+								"folderPath": "burakblob/0e3a072b-c142-4b85-82dc-d2e537fe7c51"
+							},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable5')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BURAK_DEMO_DB",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Customer",
+						"type": "varchar"
+					},
+					{
+						"name": "GOZLEM_TARIHI",
+						"type": "varchar"
+					},
+					{
+						"name": "CHURN",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CRMChurnData"
+				}
+			},
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTabledemo')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BURAK_DEMO_DB",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "UserId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Age",
+						"type": "varchar"
+					},
+					{
+						"name": "Address",
+						"type": "varchar"
+					},
+					{
+						"name": "Gender",
+						"type": "varchar"
+					},
+					{
+						"name": "UserType",
+						"type": "varchar"
+					},
+					{
+						"name": "Label",
+						"type": "varchar"
+					},
+					{
+						"name": "Total_Quantity",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Total_Value",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "StDev_Quantity",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "StDev_Value",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "AvgTimeDelta",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Recency",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Unique_TransactionId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Unique_ItemId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Unique_Location",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Unique_ProductCategory",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Total_Quantity_per_Unique_TransactionId",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Quantity_per_Unique_ItemId",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Quantity_per_Unique_Location",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Quantity_per_Unique_ProductCategory",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Value_per_Unique_TransactionId",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Value_per_Unique_ItemId",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Value_per_Unique_Location",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Value_per_Unique_ProductCategory",
+						"type": "float",
+						"precision": 15
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "retailchurn_train"
+				}
+			},
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/retailchurndata')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BURAK_DEMO_DB",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "UserId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Age",
+						"type": "varchar"
+					},
+					{
+						"name": "Address",
+						"type": "varchar"
+					},
+					{
+						"name": "Gender",
+						"type": "varchar"
+					},
+					{
+						"name": "UserType",
+						"type": "varchar"
+					},
+					{
+						"name": "Total_Quantity",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Total_Value",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "StDev_Quantity",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "StDev_Value",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "AvgTimeDelta",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Recency",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Unique_TransactionId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Unique_ItemId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Unique_Location",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Unique_ProductCategory",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Total_Quantity_per_Unique_TransactionId",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Quantity_per_Unique_ItemId",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Quantity_per_Unique_Location",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Quantity_per_Unique_ProductCategory",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Value_per_Unique_TransactionId",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Value_per_Unique_ItemId",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Value_per_Unique_Location",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Value_per_Unique_ProductCategory",
+						"type": "float",
+						"precision": 15
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "retailchurn_test"
+				}
+			},
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
+		}
+	]
+}

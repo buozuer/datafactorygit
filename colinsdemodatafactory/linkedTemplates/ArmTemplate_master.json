@@ -139,6 +139,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'cogsearchblob'"
 		},
+		"linkedService1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'linkedService1'"
+		},
 		"onurairml_scoreddata_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'onurairml_scoreddata'"
@@ -190,6 +194,18 @@
 		"trigger1_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/b87e2be7-4cc5-4795-8350-017440510a83/resourceGroups/colinsdemo/providers/Microsoft.Storage/storageAccounts/colinsdemoblob"
+		},
+		"dataFactory_properties_globalParameters_DEMO_value": {
+			"type": "string",
+			"defaultValue": "DEMO"
+		},
+		"dataFactory_properties_globalParameters_demo2_value": {
+			"type": "string",
+			"defaultValue": "demo2"
+		},
+		"dataFactory_location": {
+			"type": "string",
+			"defaultValue": "northeurope"
 		},
 		"containerUri": {
 			"type": "string",
@@ -275,8 +291,14 @@
 					"AzureML_OnurAirFlightTimePrediction_apiKey": {
 						"value": "[parameters('AzureML_OnurAirFlightTimePrediction_apiKey')]"
 					},
-					"AzureSqlDatabase_connectionString": {
-						"value": "[parameters('AzureSqlDatabase_connectionString')]"
+					"dataFactory_properties_globalParameters_DEMO_value": {
+						"value": "[parameters('dataFactory_properties_globalParameters_DEMO_value')]"
+					},
+					"dataFactory_properties_globalParameters_demo2_value": {
+						"value": "[parameters('dataFactory_properties_globalParameters_demo2_value')]"
+					},
+					"dataFactory_location": {
+						"value": "[parameters('dataFactory_location')]"
 					},
 					"AzureMLService1_properties_typeProperties_subscriptionId": {
 						"value": "[parameters('AzureMLService1_properties_typeProperties_subscriptionId')]"
@@ -308,6 +330,9 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"AzureSqlDatabase_connectionString": {
+						"value": "[parameters('AzureSqlDatabase_connectionString')]"
+					},
 					"AzureSqlDatabase1_connectionString": {
 						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
 					},
@@ -334,6 +359,9 @@
 					},
 					"cogsearchblob_connectionString": {
 						"value": "[parameters('cogsearchblob_connectionString')]"
+					},
+					"linkedService1_connectionString": {
+						"value": "[parameters('linkedService1_connectionString')]"
 					},
 					"onurairml_scoreddata_connectionString": {
 						"value": "[parameters('onurairml_scoreddata_connectionString')]"
@@ -378,18 +406,6 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
-					"DSVM_CONNECTION_connectionString": {
-						"value": "[parameters('DSVM_CONNECTION_connectionString')]"
-					},
-					"DSVM_CONNECTION_password": {
-						"value": "[parameters('DSVM_CONNECTION_password')]"
-					},
-					"DSVM_SQLSERVER_connectionString": {
-						"value": "[parameters('DSVM_SQLSERVER_connectionString')]"
-					},
-					"DSVM_SQLSERVER_password": {
-						"value": "[parameters('DSVM_SQLSERVER_password')]"
-					},
 					"SourceDataset_ibi_properties_typeProperties_fileName": {
 						"value": "[parameters('SourceDataset_ibi_properties_typeProperties_fileName')]"
 					},
@@ -401,12 +417,6 @@
 					},
 					"SourceDataset_q7y_properties_typeProperties_folderPath": {
 						"value": "[parameters('SourceDataset_q7y_properties_typeProperties_folderPath')]"
-					},
-					"DSVM_CONNECTION_properties_typeProperties_userName": {
-						"value": "[parameters('DSVM_CONNECTION_properties_typeProperties_userName')]"
-					},
-					"DSVM_SQLSERVER_properties_typeProperties_userName": {
-						"value": "[parameters('DSVM_SQLSERVER_properties_typeProperties_userName')]"
 					}
 				}
 			},
@@ -427,6 +437,24 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"DSVM_CONNECTION_connectionString": {
+						"value": "[parameters('DSVM_CONNECTION_connectionString')]"
+					},
+					"DSVM_CONNECTION_password": {
+						"value": "[parameters('DSVM_CONNECTION_password')]"
+					},
+					"DSVM_SQLSERVER_connectionString": {
+						"value": "[parameters('DSVM_SQLSERVER_connectionString')]"
+					},
+					"DSVM_SQLSERVER_password": {
+						"value": "[parameters('DSVM_SQLSERVER_password')]"
+					},
+					"DSVM_CONNECTION_properties_typeProperties_userName": {
+						"value": "[parameters('DSVM_CONNECTION_properties_typeProperties_userName')]"
+					},
+					"DSVM_SQLSERVER_properties_typeProperties_userName": {
+						"value": "[parameters('DSVM_SQLSERVER_properties_typeProperties_userName')]"
 					}
 				}
 			},

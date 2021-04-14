@@ -7,22 +7,6 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "colinsdemodatafactory"
 		},
-		"DSVM_CONNECTION_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'DSVM_CONNECTION'"
-		},
-		"DSVM_CONNECTION_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'DSVM_CONNECTION'"
-		},
-		"DSVM_SQLSERVER_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'DSVM_SQLSERVER'"
-		},
-		"DSVM_SQLSERVER_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'DSVM_SQLSERVER'"
-		},
 		"SourceDataset_ibi_properties_typeProperties_fileName": {
 			"type": "string",
 			"defaultValue": "jobs_clustered.json"
@@ -38,20 +22,146 @@
 		"SourceDataset_q7y_properties_typeProperties_folderPath": {
 			"type": "string",
 			"defaultValue": "burakblob"
-		},
-		"DSVM_CONNECTION_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "BURAK_ML_DEMO"
-		},
-		"DSVM_SQLSERVER_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "datasciencevm"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationDataset_ibi')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "cluster_list",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "status_code",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "status_msg",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "status_credits",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "status_remaining_credits",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					}
+				],
+				"typeProperties": {
+					"tableName": "[[dbo].[cennet_jsonnn]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationDataset_q7y')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "fruit",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "size",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "colour",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					}
+				],
+				"typeProperties": {
+					"tableName": "[[dbo].[cennet_deneme]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationDataset_sbd')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "burakblobconnection",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "dfstage"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationDataset_uvi')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "burakblobconnection",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "ustunberk"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/DestinationDataset_wk3')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -1463,289 +1573,6 @@
 				"schema": []
 			},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WatermarkDataset')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BURAK_DEMO_DB",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "watermarktable"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DSVM_CONNECTION')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('DSVM_CONNECTION_connectionString')]",
-					"userName": "[parameters('DSVM_CONNECTION_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('DSVM_CONNECTION_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "BURAKMLDSVM",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DSVM_SQLSERVER')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('DSVM_SQLSERVER_connectionString')]",
-					"userName": "[parameters('DSVM_SQLSERVER_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('DSVM_SQLSERVER_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "dsvmselfhosted",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/CopyPipeline_9m6')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Copy_9m6",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [
-							{
-								"name": "Source",
-								"value": "elementcogsearch//AzureDB.xlsx"
-							},
-							{
-								"name": "Destination",
-								"value": ".Azure Blob Storage file"
-							}
-						],
-						"typeProperties": {
-							"source": {
-								"type": "ExcelSource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true
-								}
-							},
-							"sink": {
-								"type": "SqlDWSink",
-								"allowPolyBase": true,
-								"polyBaseSettings": {
-									"rejectValue": 0,
-									"rejectType": "value",
-									"useTypeDefault": true
-								},
-								"tableOption": "autoCreate",
-								"disableMetricsCollection": true
-							},
-							"enableStaging": false,
-							"enableSkipIncompatibleRow": true,
-							"logSettings": {
-								"enableCopyActivityLog": true,
-								"copyActivityLogSettings": {
-									"logLevel": "Warning",
-									"enableReliableLogging": false
-								},
-								"logLocationSettings": {
-									"linkedServiceName": {
-										"referenceName": "cogsearchblob",
-										"type": "LinkedServiceReference"
-									}
-								}
-							},
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "ServiceName",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ServiceName",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ServiceType",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ServiceType",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Capability",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Capability",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "HierarchyLevelLowest",
-											"type": "String"
-										},
-										"sink": {
-											"name": "HierarchyLevelLowest",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "HierarchyLevel4",
-											"type": "String"
-										},
-										"sink": {
-											"name": "HierarchyLevel4",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "HierarchyLevel3",
-											"type": "String"
-										},
-										"sink": {
-											"name": "HierarchyLevel3",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "HierarchyLevel2",
-											"type": "String"
-										},
-										"sink": {
-											"name": "HierarchyLevel2",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "HierarchyLevel1",
-											"type": "String"
-										},
-										"sink": {
-											"name": "HierarchyLevel1",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Specification",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Specification",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Material",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Material",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "LabName",
-											"type": "String"
-										},
-										"sink": {
-											"name": "LabName",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Country",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Country",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Continent",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Continent",
-											"type": "String"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "SourceDataset_9m6",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "DestinationDataset_9m6",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"annotations": [],
-				"lastPublishTime": "2020-12-07T05:33:18Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/SourceDataset_9m6')]"
-			]
 		}
 	]
 }

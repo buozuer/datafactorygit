@@ -139,6 +139,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'cogsearchblob'"
 		},
+		"linkedService1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'linkedService1'"
+		},
 		"onurairml_scoreddata_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'onurairml_scoreddata'"
@@ -190,6 +194,18 @@
 		"trigger1_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/b87e2be7-4cc5-4795-8350-017440510a83/resourceGroups/colinsdemo/providers/Microsoft.Storage/storageAccounts/colinsdemoblob"
+		},
+		"dataFactory_properties_globalParameters_DEMO_value": {
+			"type": "string",
+			"defaultValue": "DEMO"
+		},
+		"dataFactory_properties_globalParameters_demo2_value": {
+			"type": "string",
+			"defaultValue": "demo2"
+		},
+		"dataFactory_location": {
+			"type": "string",
+			"defaultValue": "northeurope"
 		}
 	},
 	"variables": {
@@ -263,6 +279,7 @@
 				"lastPublishTime": "2020-07-09T13:22:01Z"
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/datasets/SourceDataset_4u9')]",
 				"[concat(variables('factoryId'), '/datasets/DestinationDataset_4u9')]"
 			]
@@ -484,6 +501,7 @@
 				"lastPublishTime": "2020-12-07T05:33:18Z"
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/datasets/SourceDataset_9m6')]",
 				"[concat(variables('factoryId'), '/datasets/DestinationDataset_9m6')]",
 				"[concat(variables('factoryId'), '/linkedServices/cogsearchblob')]"
@@ -554,6 +572,7 @@
 				"lastPublishTime": "2020-05-27T10:26:04Z"
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/datasets/SourceDataset_i76')]",
 				"[concat(variables('factoryId'), '/datasets/DestinationDataset_i76')]"
 			]
@@ -623,6 +642,7 @@
 				"lastPublishTime": "2020-05-27T05:52:54Z"
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/datasets/SourceDataset_sbd')]",
 				"[concat(variables('factoryId'), '/datasets/DestinationDataset_sbd')]"
 			]
@@ -1358,6 +1378,7 @@
 				"lastPublishTime": "2021-02-04T06:24:05Z"
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/datasets/SourceDataset_wk3')]",
 				"[concat(variables('factoryId'), '/datasets/DestinationDataset_wk3')]"
 			]
@@ -1427,8 +1448,60 @@
 				"lastPublishTime": "2020-04-28T11:06:20Z"
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/datasets/SourceDataset_zul')]",
 				"[concat(variables('factoryId'), '/datasets/DestinationDataset_zul')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/NYTX_DF_DEMO')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "DF_DEMO_NYCTX",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "DF_DEMO_NYCTX",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"source1": {},
+									"sink1": {}
+								}
+							},
+							"staging": {
+								"linkedService": {
+									"referenceName": "linkedService1",
+									"type": "LinkedServiceReference"
+								},
+								"folderPath": "burakblob/0e3a072b-c142-4b85-82dc-d2e537fe7c51"
+							},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[variables('factoryId')]",
+				"[concat(variables('factoryId'), '/dataflows/DF_DEMO_NYCTX')]",
+				"[concat(variables('factoryId'), '/linkedServices/linkedService1')]"
 			]
 		},
 		{
@@ -1474,6 +1547,7 @@
 				"lastPublishTime": "2020-08-18T08:14:36Z"
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/dataflows/retailchurndemo')]"
 			]
 		},
@@ -1519,6 +1593,7 @@
 				"lastPublishTime": "2020-08-25T07:05:59Z"
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureDatabricks')]"
 			]
 		},
@@ -1589,6 +1664,7 @@
 				"lastPublishTime": "2020-07-09T13:21:12Z"
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/datasets/SourceDataset_wuh')]",
 				"[concat(variables('factoryId'), '/datasets/DestinationDataset_wuh')]"
 			]
@@ -1659,6 +1735,7 @@
 				"lastPublishTime": "2021-02-04T09:41:50Z"
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/datasets/SourceDataset_zbi')]",
 				"[concat(variables('factoryId'), '/datasets/DestinationDataset_zbi')]"
 			]
@@ -1735,6 +1812,7 @@
 				"lastPublishTime": "2020-04-21T12:25:38Z"
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/datasets/SourceDataset_xie')]",
 				"[concat(variables('factoryId'), '/datasets/DestinationDataset_xie')]"
 			]
@@ -1851,6 +1929,7 @@
 				"lastPublishTime": "2019-07-01T15:06:47Z"
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/datasets/SourceDataset_ibi')]",
 				"[concat(variables('factoryId'), '/datasets/DestinationDataset_ibi')]"
 			]
@@ -1955,6 +2034,7 @@
 				"lastPublishTime": "2019-07-01T14:55:57Z"
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/datasets/SourceDataset_q7y')]",
 				"[concat(variables('factoryId'), '/datasets/DestinationDataset_q7y')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage14')]"
@@ -2235,6 +2315,7 @@
 				"lastPublishTime": "2019-12-22T22:50:09Z"
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/datasets/SourceDataset_yqa')]",
 				"[concat(variables('factoryId'), '/datasets/DestinationDataset_yqa')]"
 			]
@@ -2287,6 +2368,7 @@
 				"lastPublishTime": "2019-06-10T15:52:06Z"
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureML1')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage10')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage11')]"
@@ -2358,6 +2440,7 @@
 				"lastPublishTime": "2020-04-28T08:31:19Z"
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/datasets/SourceDataset_3fd')]",
 				"[concat(variables('factoryId'), '/datasets/DestinationDataset_3fd')]"
 			]
@@ -2428,6 +2511,7 @@
 				"lastPublishTime": "2020-04-28T07:48:41Z"
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/datasets/SourceDataset_uvi')]",
 				"[concat(variables('factoryId'), '/datasets/DestinationDataset_uvi')]"
 			]
@@ -2492,6 +2576,7 @@
 				"lastPublishTime": "2020-04-28T08:29:04Z"
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/datasets/SourceDataset_2sh')]",
 				"[concat(variables('factoryId'), '/datasets/DestinationDataset_2sh')]"
 			]
@@ -2530,6 +2615,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
 			]
 		},
@@ -2551,6 +2637,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
 			]
 		},
@@ -2933,6 +3020,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
 			]
 		},
@@ -3315,6 +3403,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
 			]
 		},
@@ -3452,7 +3541,181 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable5')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BURAK_DEMO_DB",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Customer",
+						"type": "varchar"
+					},
+					{
+						"name": "GOZLEM_TARIHI",
+						"type": "varchar"
+					},
+					{
+						"name": "CHURN",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CRMChurnData"
+				}
+			},
+			"dependsOn": [
+				"[variables('factoryId')]",
+				"[concat(variables('factoryId'), '/linkedServices/BURAK_DEMO_DB')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTabledemo')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BURAK_DEMO_DB",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "UserId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Age",
+						"type": "varchar"
+					},
+					{
+						"name": "Address",
+						"type": "varchar"
+					},
+					{
+						"name": "Gender",
+						"type": "varchar"
+					},
+					{
+						"name": "UserType",
+						"type": "varchar"
+					},
+					{
+						"name": "Label",
+						"type": "varchar"
+					},
+					{
+						"name": "Total_Quantity",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Total_Value",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "StDev_Quantity",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "StDev_Value",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "AvgTimeDelta",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Recency",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Unique_TransactionId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Unique_ItemId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Unique_Location",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Unique_ProductCategory",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Total_Quantity_per_Unique_TransactionId",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Quantity_per_Unique_ItemId",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Quantity_per_Unique_Location",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Quantity_per_Unique_ProductCategory",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Value_per_Unique_TransactionId",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Value_per_Unique_ItemId",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Value_per_Unique_Location",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Value_per_Unique_ProductCategory",
+						"type": "float",
+						"precision": 15
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "retailchurn_train"
+				}
+			},
+			"dependsOn": [
+				"[variables('factoryId')]",
+				"[concat(variables('factoryId'), '/linkedServices/BURAK_DEMO_DB')]"
 			]
 		},
 		{
@@ -3493,6 +3756,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
 			]
 		},
@@ -3514,6 +3778,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureSynapseAnalytics')]"
 			]
 		},
@@ -3535,6 +3800,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureSynapseAnalytics')]"
 			]
 		},
@@ -3556,6 +3822,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureSynapseAnalytics')]"
 			]
 		},
@@ -3909,6 +4176,7 @@
 				]
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/burakblobconnection')]"
 			]
 		},
@@ -4180,6 +4448,7 @@
 				]
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/burakblobconnection')]"
 			]
 		},
@@ -4305,6 +4574,7 @@
 				]
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/burakblobconnection')]"
 			]
 		},
@@ -4426,6 +4696,7 @@
 				]
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/burakblobconnection')]"
 			]
 		},
@@ -4450,6 +4721,7 @@
 				"schema": []
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/burakblobconnection')]"
 			]
 		},
@@ -4477,6 +4749,7 @@
 				"schema": []
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/burakblobconnection')]"
 			]
 		},
@@ -4505,6 +4778,7 @@
 				"schema": []
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/burakblobconnection')]"
 			]
 		},
@@ -4525,6 +4799,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureSynapseAnalytics')]"
 			]
 		},
@@ -5033,6 +5308,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
 			]
 		},
@@ -5541,6 +5817,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase')]"
 			]
 		},
@@ -6049,6 +6326,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
 			]
 		},
@@ -6079,6 +6357,7 @@
 				"schema": []
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/burakblobconnection')]"
 			]
 		},
@@ -6130,6 +6409,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase2')]"
 			]
 		},
@@ -6169,6 +6449,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase2')]"
 			]
 		},
@@ -6195,6 +6476,7 @@
 				"schema": []
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/burakblobconnection')]"
 			]
 		},
@@ -6221,6 +6503,7 @@
 				"schema": []
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/burakblobconnection')]"
 			]
 		},
@@ -6256,6 +6539,7 @@
 				"schema": []
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/burakblobconnection')]"
 			]
 		},
@@ -6283,6 +6567,7 @@
 				"schema": []
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/burakblobconnection')]"
 			]
 		},
@@ -6309,6 +6594,7 @@
 				"schema": []
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/burakblobconnection')]"
 			]
 		},
@@ -6457,6 +6743,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/OnurAir_ML')]"
 			]
 		},
@@ -6483,6 +6770,7 @@
 				"schema": []
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/burakblobconnection')]"
 			]
 		},
@@ -6510,6 +6798,7 @@
 				"schema": []
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/burakblobconnection')]"
 			]
 		},
@@ -6578,6 +6867,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/cogsearchblob')]"
 			]
 		},
@@ -6606,6 +6896,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/BURAK_DEMO_DB')]"
 			]
 		},
@@ -6624,6 +6915,7 @@
 				"typeProperties": {}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/DSVM_SQLSERVER')]"
 			]
 		},
@@ -6738,6 +7030,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/DSVM_CONNECTION')]"
 			]
 		},
@@ -6852,6 +7145,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/DSVM_CONNECTION')]"
 			]
 		},
@@ -6966,6 +7260,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/DSVM_CONNECTION')]"
 			]
 		},
@@ -7045,6 +7340,7 @@
 				]
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/cogsearchblob')]"
 			]
 		},
@@ -7317,6 +7613,7 @@
 				]
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/burakblobconnection')]"
 			]
 		},
@@ -7590,6 +7887,7 @@
 				]
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/burakblobconnection')]"
 			]
 		},
@@ -7862,6 +8160,7 @@
 				]
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/burakblobconnection')]"
 			]
 		},
@@ -7976,6 +8275,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/DSVM_CONNECTION')]"
 			]
 		},
@@ -8029,6 +8329,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage14')]"
 			]
 		},
@@ -8072,6 +8373,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage14')]"
 			]
 		},
@@ -8186,6 +8488,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/DSVM_CONNECTION')]"
 			]
 		},
@@ -8300,6 +8603,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/DSVM_CONNECTION')]"
 			]
 		},
@@ -8335,6 +8639,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/DSVM_SQLSERVER')]"
 			]
 		},
@@ -8449,6 +8754,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/DSVM_CONNECTION')]"
 			]
 		},
@@ -8490,6 +8796,7 @@
 				]
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/burakblobconnection')]"
 			]
 		},
@@ -8516,6 +8823,7 @@
 				"schema": []
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/onurairml_scoreddata')]"
 			]
 		},
@@ -8553,6 +8861,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/DSVM_SQLSERVER')]"
 			]
 		},
@@ -8667,6 +8976,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/DSVM_CONNECTION')]"
 			]
 		},
@@ -8688,6 +8998,141 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
+				"[concat(variables('factoryId'), '/linkedServices/BURAK_DEMO_DB')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/retailchurndata')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BURAK_DEMO_DB",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "UserId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Age",
+						"type": "varchar"
+					},
+					{
+						"name": "Address",
+						"type": "varchar"
+					},
+					{
+						"name": "Gender",
+						"type": "varchar"
+					},
+					{
+						"name": "UserType",
+						"type": "varchar"
+					},
+					{
+						"name": "Total_Quantity",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Total_Value",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "StDev_Quantity",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "StDev_Value",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "AvgTimeDelta",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Recency",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Unique_TransactionId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Unique_ItemId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Unique_Location",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Unique_ProductCategory",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Total_Quantity_per_Unique_TransactionId",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Quantity_per_Unique_ItemId",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Quantity_per_Unique_Location",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Quantity_per_Unique_ProductCategory",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Value_per_Unique_TransactionId",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Value_per_Unique_ItemId",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Value_per_Unique_Location",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Total_Value_per_Unique_ProductCategory",
+						"type": "float",
+						"precision": 15
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "retailchurn_test"
+				}
+			},
+			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/BURAK_DEMO_DB')]"
 			]
 		},
@@ -8702,7 +9147,9 @@
 					"connectionString": "[parameters('AzureBlobStorage1_connectionString')]"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage10')]",
@@ -8715,7 +9162,9 @@
 					"connectionString": "[parameters('AzureBlobStorage10_connectionString')]"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage11')]",
@@ -8728,7 +9177,9 @@
 					"connectionString": "[parameters('AzureBlobStorage11_connectionString')]"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage12')]",
@@ -8741,7 +9192,9 @@
 					"connectionString": "[parameters('AzureBlobStorage12_connectionString')]"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage13')]",
@@ -8754,7 +9207,9 @@
 					"connectionString": "[parameters('AzureBlobStorage13_connectionString')]"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage14')]",
@@ -8767,7 +9222,9 @@
 					"connectionString": "[parameters('AzureBlobStorage14_connectionString')]"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage2')]",
@@ -8780,7 +9237,9 @@
 					"connectionString": "[parameters('AzureBlobStorage2_connectionString')]"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage3')]",
@@ -8793,7 +9252,9 @@
 					"connectionString": "[parameters('AzureBlobStorage3_connectionString')]"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage4')]",
@@ -8806,7 +9267,9 @@
 					"connectionString": "[parameters('AzureBlobStorage4_connectionString')]"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage5')]",
@@ -8819,7 +9282,9 @@
 					"connectionString": "[parameters('AzureBlobStorage5_connectionString')]"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage6')]",
@@ -8832,7 +9297,9 @@
 					"connectionString": "[parameters('AzureBlobStorage6_connectionString')]"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage7')]",
@@ -8845,7 +9312,9 @@
 					"connectionString": "[parameters('AzureBlobStorage7_connectionString')]"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage8')]",
@@ -8858,7 +9327,9 @@
 					"connectionString": "[parameters('AzureBlobStorage8_connectionString')]"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage9')]",
@@ -8871,7 +9342,9 @@
 					"connectionString": "[parameters('AzureBlobStorage9_connectionString')]"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureDatabricks')]",
@@ -8889,7 +9362,9 @@
 					"existingClusterId": "0825-065139-opt873"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureML1')]",
@@ -8906,7 +9381,9 @@
 					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureML2')]",
@@ -8923,7 +9400,9 @@
 					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureMLService1')]",
@@ -8944,7 +9423,9 @@
 					"tenant": "[parameters('AzureMLService1_properties_typeProperties_tenant')]"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureML_OnurAirFlightTimePrediction')]",
@@ -8962,7 +9443,9 @@
 					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase')]",
@@ -8975,7 +9458,9 @@
 					"connectionString": "[parameters('AzureSqlDatabase_connectionString')]"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase1')]",
@@ -8988,7 +9473,9 @@
 					"connectionString": "[parameters('AzureSqlDatabase1_connectionString')]"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase2')]",
@@ -9001,7 +9488,9 @@
 					"connectionString": "[parameters('AzureSqlDatabase2_connectionString')]"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase3')]",
@@ -9014,7 +9503,9 @@
 					"connectionString": "[parameters('AzureSqlDatabase3_connectionString')]"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureSynapseAnalytics')]",
@@ -9027,7 +9518,9 @@
 					"connectionString": "[parameters('AzureSynapseAnalytics_connectionString')]"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/BURAK_DEMO_DB')]",
@@ -9040,7 +9533,9 @@
 					"connectionString": "[parameters('BURAK_DEMO_DB_connectionString')]"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/DSVM_CONNECTION')]",
@@ -9063,6 +9558,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/integrationRuntimes/BURAKMLDSVM')]"
 			]
 		},
@@ -9087,6 +9583,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/integrationRuntimes/dsvmselfhosted')]"
 			]
 		},
@@ -9101,7 +9598,9 @@
 					"connectionString": "[parameters('OnurAirBlob_connectionString')]"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/OnurAir_ML')]",
@@ -9114,7 +9613,9 @@
 					"connectionString": "[parameters('OnurAir_ML_connectionString')]"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/burakblobconnection')]",
@@ -9127,7 +9628,9 @@
 					"connectionString": "[parameters('burakblobconnection_connectionString')]"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/cogsearchblob')]",
@@ -9140,7 +9643,24 @@
 					"connectionString": "[parameters('cogsearchblob_connectionString')]"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/linkedService1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('linkedService1_connectionString')]"
+				}
+			},
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/onurairml_scoreddata')]",
@@ -9153,7 +9673,9 @@
 					"connectionString": "[parameters('onurairml_scoreddata_connectionString')]"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/eventbasetrigger')]",
@@ -9184,6 +9706,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/pipelines/Retailchurnpipeline')]"
 			]
 		},
@@ -9217,6 +9740,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/pipelines/Retailchurnpipeline')]"
 			]
 		},
@@ -9228,7 +9752,9 @@
 				"type": "SelfHosted",
 				"typeProperties": {}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/dsvmselfhosted')]",
@@ -9238,7 +9764,9 @@
 				"type": "SelfHosted",
 				"typeProperties": {}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/integruntimeml')]",
@@ -9257,7 +9785,9 @@
 					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/DF_DEMO_NYCTX')]",
@@ -9299,6 +9829,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/datasets/DelimitedText4')]",
 				"[concat(variables('factoryId'), '/datasets/AzureSynapseAnalyticsTable2')]"
 			]
@@ -9329,10 +9860,11 @@
 						}
 					],
 					"transformations": [],
-					"script": "source(output(\n\t\tDAY as integer,\n\t\tMONTH as integer,\n\t\tYEAR as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> source1\nsource1 sink(input(\n\t\tday as integer,\n\t\tmonth as integer,\n\t\tyear as integer,\n\t\tYEARMONTHDAY as date\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tday = DAY,\n\t\tmonth = MONTH,\n\t\tyear = YEAR\n\t),\n\terrorHandlingOption: 'stopOnFirstError') ~> sink1"
+					"script": "source(output(\n\t\tDAY as integer,\n\t\tMONTH as integer,\n\t\tYEAR as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> source1\nsource1 sink(input(\n\t\tday as integer,\n\t\tmonth as integer,\n\t\tyear as integer,\n\t\tYEARMONTHDAY as date\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tday = DAY,\n\t\tmonth = MONTH,\n\t\tyear = YEAR\n\t),\n\terrorHandlingOption: 'stopOnFirstError') ~> sink1"
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/datasets/AzureSqlSource')]",
 				"[concat(variables('factoryId'), '/datasets/AzureSqlTarget')]"
 			]
@@ -9367,6 +9899,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/datasets/DelimitedText1')]",
 				"[concat(variables('factoryId'), '/datasets/AzureSqlTable3')]"
 			]
@@ -9401,6 +9934,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/datasets/Json1')]",
 				"[concat(variables('factoryId'), '/datasets/AzureSynapseAnalyticsTable3')]"
 			]
@@ -9439,9 +9973,29 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/datasets/DelimitedText3')]",
 				"[concat(variables('factoryId'), '/datasets/AzureSqlTable4')]"
 			]
+		},
+		{
+			"name": "[parameters('factoryName')]",
+			"type": "Microsoft.DataFactory/factories",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"globalParameters": {
+					"DEMO": {
+						"type": "string",
+						"value": "[parameters('dataFactory_properties_globalParameters_DEMO_value')]"
+					},
+					"demo2": {
+						"type": "string",
+						"value": "[parameters('dataFactory_properties_globalParameters_demo2_value')]"
+					}
+				}
+			},
+			"dependsOn": [],
+			"location": "[parameters('dataFactory_location')]"
 		}
 	]
 }

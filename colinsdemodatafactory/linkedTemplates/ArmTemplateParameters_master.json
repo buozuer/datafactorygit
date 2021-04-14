@@ -104,6 +104,9 @@
 		"cogsearchblob_connectionString": {
 			"value": ""
 		},
+		"linkedService1_connectionString": {
+			"value": ""
+		},
 		"onurairml_scoreddata_connectionString": {
 			"value": ""
 		},
@@ -142,6 +145,15 @@
 		},
 		"trigger1_properties_typeProperties_scope": {
 			"value": "/subscriptions/b87e2be7-4cc5-4795-8350-017440510a83/resourceGroups/colinsdemo/providers/Microsoft.Storage/storageAccounts/colinsdemoblob"
+		},
+		"dataFactory_properties_globalParameters_DEMO_value": {
+			"value": "DEMO"
+		},
+		"dataFactory_properties_globalParameters_demo2_value": {
+			"value": "demo2"
+		},
+		"dataFactory_location": {
+			"value": "northeurope"
 		},
 		"containerUri": {
 			"value": ""

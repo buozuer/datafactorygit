@@ -1,1 +1,10 @@
-{}
+{
+	"DEMO": {
+		"type": "string",
+		"value": "DEMO"
+	},
+	"demo2": {
+		"type": "string",
+		"value": "demo2"
+	}
+}

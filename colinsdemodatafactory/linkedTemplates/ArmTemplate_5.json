@@ -21,6 +21,175 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/DF_DEMO_NYCTX')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "DelimitedText4",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "AzureSynapseAnalyticsTable2",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "Select1"
+						},
+						{
+							"name": "SurrogateKey1"
+						},
+						{
+							"name": "DerivedColumn1"
+						}
+					],
+					"script": "source(output(\n\t\tmedallion as string,\n\t\thack_license as string,\n\t\tvendor_id as string,\n\t\trate_code as string,\n\t\tstore_and_fwd_flag as string,\n\t\tpickup_datetime as string,\n\t\tdropoff_datetime as string,\n\t\tpassenger_count as string,\n\t\ttrip_time_in_secs as string,\n\t\ttrip_distance as string,\n\t\tpickup_longitude as string,\n\t\tpickup_latitude as string,\n\t\tdropoff_longitude as string,\n\t\tdropoff_latitude as string,\n\t\tpayment_type as string,\n\t\tfare_amount as string,\n\t\tsurcharge as string,\n\t\tmta_tax as string,\n\t\ttolls_amount as string,\n\t\ttotal_amount as string,\n\t\ttip_amount as string,\n\t\ttipped as string,\n\t\ttip_class as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tlimit: 100) ~> source1\nSurrogateKey1 select(mapColumn(\n\t\tmedallion,\n\t\thack_license,\n\t\tvendor_id,\n\t\trate_code,\n\t\tstore_and_fwd_flag,\n\t\tpickup_datetime,\n\t\tdropoff_datetime,\n\t\tpassenger_count,\n\t\ttrip_time_in_secs,\n\t\ttrip_distance,\n\t\tpickup_longitude,\n\t\tpickup_latitude,\n\t\tdropoff_longitude,\n\t\tdropoff_latitude,\n\t\tpayment_type,\n\t\tfare_amount,\n\t\tsurcharge,\n\t\tmta_tax,\n\t\ttolls_amount,\n\t\ttotal_amount,\n\t\ttip_amount,\n\t\ttipped\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nsource1 keyGenerate(output(Surrogatekey as long),\n\tstartAt: 1L) ~> SurrogateKey1\nSelect1 derive(weekoftheyear = weekOfYear(toTimestamp(pickup_datetime))) ~> DerivedColumn1\nDerivedColumn1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\ttruncate:true,\n\tformat: 'table',\n\tstaged: true,\n\tmapColumn(\n\t\tmedallion,\n\t\thack_license,\n\t\tvendor_id,\n\t\trate_code,\n\t\tstore_and_fwd_flag,\n\t\tpickup_datetime,\n\t\tdropoff_datetime,\n\t\tpassenger_count,\n\t\ttrip_time_in_secs,\n\t\ttrip_distance,\n\t\tpickup_longitude,\n\t\tpickup_latitude,\n\t\tdropoff_longitude,\n\t\tdropoff_latitude,\n\t\tpayment_type,\n\t\tfare_amount,\n\t\tsurcharge,\n\t\tmta_tax,\n\t\ttolls_amount,\n\t\ttotal_amount,\n\t\ttip_amount,\n\t\ttipped,\n\t\tweekoftheyear\n\t),\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dataflow1')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "AzureSqlSource",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "AzureSqlTarget",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [],
+					"script": "source(output(\n\t\tDAY as integer,\n\t\tMONTH as integer,\n\t\tYEAR as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> source1\nsource1 sink(input(\n\t\tday as integer,\n\t\tmonth as integer,\n\t\tyear as integer,\n\t\tYEARMONTHDAY as date\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tday = DAY,\n\t\tmonth = MONTH,\n\t\tyear = YEAR\n\t),\n\terrorHandlingOption: 'stopOnFirstError') ~> sink1"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dataflow3')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "DelimitedText1",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "AzureSqlTable3",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [],
+					"script": "source(output(\n\t\tId as string,\n\t\tMSSubClass as string,\n\t\tMSZoning as string,\n\t\tLotFrontage as string,\n\t\tLotArea as string,\n\t\tStreet as string,\n\t\tAlley as string,\n\t\tLotShape as string,\n\t\tLandContour as string,\n\t\tUtilities as string,\n\t\tLotConfig as string,\n\t\tLandSlope as string,\n\t\tNeighborhood as string,\n\t\tCondition1 as string,\n\t\tCondition2 as string,\n\t\tBldgType as string,\n\t\tHouseStyle as string,\n\t\tOverallQual as string,\n\t\tOverallCond as string,\n\t\tYearBuilt as string,\n\t\tYearRemodAdd as string,\n\t\tRoofStyle as string,\n\t\tRoofMatl as string,\n\t\tExterior1st as string,\n\t\tExterior2nd as string,\n\t\tMasVnrType as string,\n\t\tMasVnrArea as string,\n\t\tExterQual as string,\n\t\tExterCond as string,\n\t\tFoundation as string,\n\t\tBsmtQual as string,\n\t\tBsmtCond as string,\n\t\tBsmtExposure as string,\n\t\tBsmtFinType1 as string,\n\t\tBsmtFinSF1 as string,\n\t\tBsmtFinType2 as string,\n\t\tBsmtFinSF2 as string,\n\t\tBsmtUnfSF as string,\n\t\tTotalBsmtSF as string,\n\t\tHeating as string,\n\t\tHeatingQC as string,\n\t\tCentralAir as string,\n\t\tElectrical as string,\n\t\t{1stFlrSF} as string,\n\t\t{2ndFlrSF} as string,\n\t\tLowQualFinSF as string,\n\t\tGrLivArea as string,\n\t\tBsmtFullBath as string,\n\t\tBsmtHalfBath as string,\n\t\tFullBath as string,\n\t\tHalfBath as string,\n\t\tBedroomAbvGr as string,\n\t\tKitchebvGr as string,\n\t\tKitchenQual as string,\n\t\tTotRmsAbvGrd as string,\n\t\tFunctiol as string,\n\t\tFireplaces as string,\n\t\tFireplaceQu as string,\n\t\tGarageType as string,\n\t\tGarageYrBlt as string,\n\t\tGarageFinish as string,\n\t\tGarageCars as string,\n\t\tGarageArea as string,\n\t\tGarageQual as string,\n\t\tGarageCond as string,\n\t\tPavedDrive as string,\n\t\tWoodDeckSF as string,\n\t\tOpenPorchSF as string,\n\t\tEnclosedPorch as string,\n\t\t{3SsnPorch} as string,\n\t\tScreenPorch as string,\n\t\tPoolArea as string,\n\t\tPoolQC as string,\n\t\tFence as string,\n\t\tMiscFeature as string,\n\t\tMiscVal as string,\n\t\tMoSold as string,\n\t\tYrSold as string,\n\t\tSaleType as string,\n\t\tSaleCondition as string,\n\t\tSalePrice as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tlimit: 100) ~> source1\nsource1 sink(input(\n\t\tId as integer,\n\t\tMSSubClass as integer,\n\t\tMSZoning as string,\n\t\tLotFrontage as integer,\n\t\tLotArea as integer,\n\t\tStreet as string,\n\t\tAlley as string,\n\t\tLotShape as string,\n\t\tLandContour as string,\n\t\tUtilities as string,\n\t\tLotConfig as string,\n\t\tLandSlope as string,\n\t\tNeighborhood as string,\n\t\tCondition1 as string,\n\t\tCondition2 as string,\n\t\tBldgType as string,\n\t\tHouseStyle as string,\n\t\tOverallQual as integer,\n\t\tOverallCond as integer,\n\t\tYearBuilt as integer,\n\t\tYearRemodAdd as string,\n\t\tRoofStyle as string,\n\t\tRoofMatl as string,\n\t\tExterior1st as string,\n\t\tExterior2nd as string,\n\t\tMasVnrType as string,\n\t\tMasVnrArea as integer,\n\t\tExterQual as string,\n\t\tExterCond as string,\n\t\tFoundation as string,\n\t\tBsmtQual as string,\n\t\tBsmtCond as string,\n\t\tBsmtExposure as string,\n\t\tBsmtFinType1 as string,\n\t\tBsmtFinSF1 as integer,\n\t\tBsmtFinType2 as string,\n\t\tBsmtFinSF2 as integer,\n\t\tBsmtUnfSF as integer,\n\t\tTotalBsmtSF as integer,\n\t\tHeating as string,\n\t\tHeatingQC as string,\n\t\tCentralAir as string,\n\t\tElectrical as string,\n\t\t{1stFlrSF} as integer,\n\t\t{2ndFlrSF} as integer,\n\t\tLowQualFinSF as string,\n\t\tGrLivArea as integer,\n\t\tBsmtFullBath as integer,\n\t\tBsmtHalfBath as integer,\n\t\tFullBath as integer,\n\t\tHalfBath as integer,\n\t\tBedroomAbvGr as integer,\n\t\tKitchenAbvGr as integer,\n\t\tKitchenQual as string,\n\t\tTotRmsAbvGrd as integer,\n\t\tFunctional as string,\n\t\tFireplaces as integer,\n\t\tFireplaceQu as string,\n\t\tGarageType as string,\n\t\tGarageYrBlt as integer,\n\t\tGarageFinish as string,\n\t\tGarageCars as integer,\n\t\tGarageArea as integer,\n\t\tGarageQual as string,\n\t\tGarageCond as string,\n\t\tPavedDrive as string,\n\t\tWoodDeckSF as integer,\n\t\tOpenPorchSF as integer,\n\t\tEnclosedPorch as integer,\n\t\t{3SsnPorch} as integer,\n\t\tScreenPorch as integer,\n\t\tPoolArea as integer,\n\t\tPoolQC as string,\n\t\tFence as string,\n\t\tMiscFeature as string,\n\t\tMiscVal as integer,\n\t\tMoSold as integer,\n\t\tYrSold as integer,\n\t\tSaleType as string,\n\t\tSaleCondition as string,\n\t\tSalePrice as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink1"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dataflow4')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "Json1",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "AzureSynapseAnalyticsTable3",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [],
+					"script": "source(output(\n\t\tdocument as string,\n\t\tlabels as (label as string, key as string, value as (page as string, text as string, boundingBoxes as double[][])[])[]\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tdocumentForm: 'documentPerLine') ~> source1\nsource1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tstaged: true,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/retailchurndemo')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "DelimitedText3",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "AzureSqlTable4",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "DerivedColumn1"
+						}
+					],
+					"script": "source(output(\n\t\tUserId as string,\n\t\tAge as string,\n\t\tAddress as string,\n\t\tGender as string,\n\t\tUserType as string,\n\t\tLabel as string,\n\t\tTotal_Quantity as string,\n\t\tTotal_Value as string,\n\t\tStDev_Quantity as string,\n\t\tStDev_Value as string,\n\t\tAvgTimeDelta as string,\n\t\tRecency as string,\n\t\tUnique_TransactionId as string,\n\t\tUnique_ItemId as string,\n\t\tUnique_Location as string,\n\t\tUnique_ProductCategory as string,\n\t\tTotal_Quantity_per_Unique_TransactionId as string,\n\t\tTotal_Quantity_per_Unique_ItemId as string,\n\t\tTotal_Quantity_per_Unique_Location as string,\n\t\tTotal_Quantity_per_Unique_ProductCategory as string,\n\t\tTotal_Value_per_Unique_TransactionId as string,\n\t\tTotal_Value_per_Unique_ItemId as string,\n\t\tTotal_Value_per_Unique_Location as string,\n\t\tTotal_Value_per_Unique_ProductCategory as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tpartitionBy('roundRobin', 2)) ~> source1\nsource1 derive(Label = case(Label == 'Churner',1,0)) ~> DerivedColumn1\nDerivedColumn1 sink(input(\n\t\tUserId as integer,\n\t\tAge as string,\n\t\tAddress as string,\n\t\tGender as string,\n\t\tUserType as string,\n\t\tLabel as string,\n\t\tTotal_Quantity as integer,\n\t\tTotal_Value as integer,\n\t\tStDev_Quantity as double,\n\t\tStDev_Value as double,\n\t\tAvgTimeDelta as double,\n\t\tRecency as integer,\n\t\tUnique_TransactionId as integer,\n\t\tUnique_ItemId as integer,\n\t\tUnique_Location as integer,\n\t\tUnique_ProductCategory as integer,\n\t\tTotal_Quantity_per_Unique_TransactionId as double,\n\t\tTotal_Quantity_per_Unique_ItemId as double,\n\t\tTotal_Quantity_per_Unique_Location as double,\n\t\tTotal_Quantity_per_Unique_ProductCategory as double,\n\t\tTotal_Value_per_Unique_TransactionId as double,\n\t\tTotal_Value_per_Unique_ItemId as double,\n\t\tTotal_Value_per_Unique_Location as double,\n\t\tTotal_Value_per_Unique_ProductCategory as double\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\ttruncate:true,\n\tformat: 'table',\n\tmapColumn(\n\t\tAge,\n\t\tAddress,\n\t\tGender,\n\t\tUserType,\n\t\tLabel,\n\t\tTotal_Quantity,\n\t\tTotal_Value,\n\t\tStDev_Quantity,\n\t\tStDev_Value,\n\t\tAvgTimeDelta,\n\t\tRecency,\n\t\tUnique_TransactionId,\n\t\tUnique_ItemId,\n\t\tUnique_Location,\n\t\tUnique_ProductCategory,\n\t\tTotal_Quantity_per_Unique_TransactionId,\n\t\tTotal_Quantity_per_Unique_ItemId,\n\t\tTotal_Quantity_per_Unique_Location,\n\t\tTotal_Quantity_per_Unique_ProductCategory,\n\t\tTotal_Value_per_Unique_TransactionId,\n\t\tTotal_Value_per_Unique_ItemId,\n\t\tTotal_Value_per_Unique_Location,\n\t\tTotal_Value_per_Unique_ProductCategory,\n\t\tUserId\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink1"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/CopyPipeline_4u9')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -1019,6 +1188,55 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/NYTX_DF_DEMO')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "DF_DEMO_NYCTX",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "DF_DEMO_NYCTX",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"source1": {},
+									"sink1": {}
+								}
+							},
+							"staging": {
+								"linkedService": {
+									"referenceName": "linkedService1",
+									"type": "LinkedServiceReference"
+								},
+								"folderPath": "burakblob/0e3a072b-c142-4b85-82dc-d2e537fe7c51"
+							},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/DF_DEMO_NYCTX')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Retailchurnpipeline')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -1060,7 +1278,9 @@
 				],
 				"lastPublishTime": "2020-08-18T08:14:36Z"
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/retailchurndemo')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/copydata_nyctaxi')]",
